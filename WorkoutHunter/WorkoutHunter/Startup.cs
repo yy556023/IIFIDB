@@ -57,7 +57,7 @@ namespace WorkoutHunter
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=test}/{action=Index}/{id?}");
+                    pattern: "{controller=Student}/{action=Login}/{id?}");
             });
         }
     }

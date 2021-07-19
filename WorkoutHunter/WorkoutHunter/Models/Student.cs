@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WorkoutHunter.Models
 {
-    public class testV
+    public class Student
     {
         [Key]
         public string UID { get; set; }

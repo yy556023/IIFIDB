@@ -8,13 +8,34 @@ using WorkoutHunter.Models;
 
 namespace WorkoutHunter.Controllers
 {
-    public class testController : Controller
+    public class StudentController : Controller
     {
         private readonly userContext _context;
 
-        public testController(userContext context)
+        public StudentController(userContext context)
         {
             _context = context;
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Sign()
+        {
+            return View();
+        }
+        
+        public IActionResult test(string email,string password,string Class)
+        {
+            test data = new test
+            {
+                acc = email,
+                pas = password,
+                pos = Class
+            };
+
+            return View(data);
         }
 
         public async Task<IActionResult> Index()
