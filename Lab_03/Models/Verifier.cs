@@ -71,7 +71,7 @@ namespace Lab_03.Models
                 Email = userID,
                 PassWord = hashPassword,
                 Class = "N",
-                Role = "C",
+                Role = "S",
                 SignDate = DateTime.Now,
                 salt = salt
             };
