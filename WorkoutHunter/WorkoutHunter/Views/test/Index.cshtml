@@ -1,0 +1,35 @@
+﻿@model List<WorkoutHunter.Models.testV>
+@{
+    Layout = null;
+}
+
+<table>
+    <tr>
+        <td>ID</td>
+        <td>RANK</td>
+        <td>STR</td>
+        <td>VIT</td>
+        <td>AGI</td>
+        <td>道具</td>
+        <td>技能</td>
+        <td>金錢</td>
+        <td>角色圖</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.UID</td>
+            <td>@item.Class</td>
+            <td>@item.Strength</td>
+            <td>@item.Vitality</td>
+            <td>@item.Agility</td>
+            <td>@item.Items</td>
+            <td>@item.Skills</td>
+            <td>@item.Money</td>
+            <td>@item.ChaPic</td>
+        </tr>
+    }
+
+
+</table>
+
