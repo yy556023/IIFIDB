@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WorkoutHunter.Models
 {
-    public class user_Status
+    public class characterItemSkill
     {
         [Key]
         public string UID { get; set; }
-        public int Strength { get; set; }
-        public int Vitality { get; set; }
-        public int Agility { get; set; }
-        public int PunishDay { get; set; }
+        public string Items { get; set; }
+        public string Skills { get; set; }
+        public string ChaPic { get; set; }
+        public int Money { get; set; }
     }
 }

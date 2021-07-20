@@ -306,3 +306,4 @@ D:\Documents\repo\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\View
 D:\Documents\repo\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\Student\Login.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\Student\Sign.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\Student\test.cshtml.g.cs
+D:\Documents\repo\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\WorkoutHunter.csproj.AssemblyReference.cache

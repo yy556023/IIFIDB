@@ -21,21 +21,53 @@ namespace WorkoutHunter.Controllers
         {
             return View();
         }
+
+        //學員註冊畫面
         public IActionResult Sign()
         {
             return View();
         }
         
-        public IActionResult test(string email,string password,string Class)
+        //學員註冊資料送往後端
+        public IActionResult test(string email,string password,string role)
         {
-            test data = new test
+            List<string> ch = new List<string>();
+
+            Random r = new Random();
+
+            string id = "";
+
+            // 產生A-Z a-z 0-9的 字串List
+            for (int i = 48 ; i < 123 ; i++)
             {
-                acc = email,
-                pas = password,
-                pos = Class
+                if ((i >= 58 && i < 65) || (i >= 91 && i < 97))
+                {
+                    continue;
+                }
+                ch.Add(Convert.ToChar(i).ToString());
+            }
+
+            // 產生UID
+            for (int i = 0 ; i < 10 ; i++)
+            {
+                id += ch[r.Next(0, 63)];
+            }
+
+            // 新增一筆資料的物件
+            user_Info sign = new user_Info
+            {
+                UID = id,
+                Email = email,
+                PassWord = password,
+                Role = role,
+                SignDate = DateTime.Now.ToString("d")               
             };
 
-            return View(data);
+            //_context.Add(sign);
+            //_context.SaveChanges();
+
+            //return Content(id);
+            return View("Index",_context.user_Info.ToList());
         }
 
         public async Task<IActionResult> Index()
