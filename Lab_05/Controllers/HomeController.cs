@@ -25,7 +25,10 @@ namespace Lab_05.Controllers
             _context = context;
             _logger = logger;
         }
-
+        public IActionResult defense()
+        {
+            return BadRequest();
+        }
         [AllowAnonymous]
         public IActionResult Login()
         {
