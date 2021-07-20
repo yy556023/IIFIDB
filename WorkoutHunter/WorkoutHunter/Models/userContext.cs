@@ -18,6 +18,6 @@ namespace WorkoutHunter.Models
 
         public DbSet<WorkoutHunter.Models.user_Status> user_Status { get; set; }
 
-        public DbSet<testV> testV { get; set; }
+        public DbSet<Student> testV { get; set; }
     }
 }

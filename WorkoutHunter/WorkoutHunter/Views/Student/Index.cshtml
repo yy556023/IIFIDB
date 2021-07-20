@@ -1,0 +1,27 @@
+﻿@model List<WorkoutHunter.Models.user_Info>
+@{
+    Layout = null;
+}
+
+<table>
+    <tr>
+        <td>ID</td>
+        <td>信箱</td>
+        <td>密碼</td>
+        <td>身分</td>
+        <td>註冊日期</td>
+        <td>RANK</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.UID</td>
+            <td>@item.Email</td>
+            <td>@item.PassWord</td>
+            <td>@item.Role</td>
+            <td>@item.SignDate</td>
+            <td>@item.Class</td>
+        </tr>
+    }
+
+</table>
