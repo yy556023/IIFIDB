@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WorkoutHunter.Models;
+using Microsoft.Data.SqlClient;
 
 namespace WorkoutHunter.Controllers
 {
@@ -27,9 +28,9 @@ namespace WorkoutHunter.Controllers
         {
             return View();
         }
-        
+
         //學員註冊資料送往後端
-        public IActionResult test(string email,string password,string role)
+        public async Task<IActionResult> test(string email, string password,string repassword, string role)
         {
             List<string> ch = new List<string>();
 
@@ -54,39 +55,45 @@ namespace WorkoutHunter.Controllers
             }
 
             // 新增一筆資料的物件
-            user_Info sign = new user_Info
+            userInfo sign = new userInfo
             {
                 UID = id,
                 Email = email,
                 PassWord = password,
                 Role = role,
-                SignDate = DateTime.Now.ToString("d")               
+                SignDate = DateTime.Now.ToString("yyyy/MM/dd")
             };
+
+            //SqlConnection cn = new SqlConnection("LinkToDb");
+
+            //SqlTransaction t = cn.BeginTransaction();
 
             //_context.Add(sign);
             //_context.SaveChanges();
 
+            //if (password == repassword)
+            //{              
+            //    t.Commit();
+            //}
+            //else
+            //{
+            //    t.Rollback();
+            //}
+
             //return Content(id);
-            return View("Index",_context.user_Info.ToList());
+            //return View("Index", await _context.user_info.ToListAsync());
+            return View(sign);
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.testV.ToListAsync());
+            return View();
         }
 
         //test/Detail/ARRQNF9BCN
-        public async Task<IActionResult> Detail(string id)
+        public IActionResult Detail()
         {
-            var test = await _context.testV.FindAsync(id);
-
-            //var test = from o in _context.testV
-            //           where o.UID == id
-            //           select o;
-
-            //var test2 = test.FirstOrDefault();
-
-            return View(test);
+            return View();
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿@model WorkoutHunter.Models.user_Info
+﻿@model WorkoutHunter.Models.userInfo
 @{
     Layout = null;
 }
 
+ID：@Model.UID @Html.Raw("<br />")
 帳號：@Model.Email @Html.Raw("<br />")
 密碼：@Model.PassWord @Html.Raw("<br />")
 身分：@Model.Role @Html.Raw("<br />")
-註冊日期：@Model.SignDate
+註冊日：@Model.SignDate @Html.Raw("<br />")
+RANK：
