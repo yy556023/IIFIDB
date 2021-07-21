@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WorkoutHunter.Models;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WorkoutHunter
 {
@@ -26,11 +26,17 @@ namespace WorkoutHunter
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<userContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("LinkToDb"));
-            });
             services.AddControllersWithViews();
+            services.AddDbContext<userContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LinkToDb")));
+            services.AddSession();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.Cookie.HttpOnly = true;
+                    option.AccessDeniedPath = "/Student";
+                    option.LoginPath = "/Student/Login";
+                    option.LogoutPath = "/Student/LogOut";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,9 +54,9 @@ namespace WorkoutHunter
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

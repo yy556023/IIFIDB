@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Index</title>
+		<script>alert('test')</script>
 	</head>
 	<body>
 		<form action="" method="post">
@@ -13,9 +14,13 @@
 				<label for="student">學員</label>
 				<input type="radio" name="class" id="coach" value="coach" />
 				<label for="coach">教練</label><br />
-			</div>
-			<p><input type="submit" value="測試" /></p>
-		</form>
+				<label for="email">帳號</label><br />
+				<input type="text" name="email" id="email" value="" /><br />
+				<label for="password">信箱</label><br />
+				<input type="text" name="password" id="password" value="" /><br />
+			</div><br />
+			<input type="submit" value="登入" />
+		</form><br />
 		<a href="/Student/Sign">註冊</a>
 	</body>
 

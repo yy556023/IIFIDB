@@ -1,7 +1,4 @@
-﻿@{
-    Layout = null;
-}
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +8,15 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="/Student/Login" method="post">
         <div>
-            <input type="radio" name="class" id="student" value="student" />
-            <label for="student">學員</label>
-            <input type="radio" name="class" id="coach" value="coach" />
-            <label for="coach">教練</label><br />
-        </div>
-        <p><input type="submit" value="測試" /></p>
-    </form>
+            <label for="email">信箱</label><br />
+            <input type="text" name="Email" id="email" value="" /><br />
+            <label for="password">密碼</label><br />
+            <input type="text" name="Password" id="password" value="" /><br />
+        </div><br />
+        <input type="submit" value="登入" />
+    </form><br />
     <a href="/Student/Sign">註冊</a>
 </body>
 </html>
