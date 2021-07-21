@@ -33,9 +33,9 @@ namespace Lab_05
                 .AddCookie(option =>
                 {
                     option.Cookie.HttpOnly = true;
-                    option.AccessDeniedPath = "/Home";
+                    option.AccessDeniedPath = "/Home/defense";
                     option.LoginPath = "/Home/Login";
-                    option.LogoutPath = "/Home/LogOut";
+                    option.LogoutPath = "/Home/Logout";
                 });
         }
 
