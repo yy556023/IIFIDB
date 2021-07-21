@@ -55,7 +55,7 @@ namespace WorkoutHunter.Controllers
             }
 
             // 新增一筆資料的物件
-            userInfo sign = new userInfo
+            user_Info sign = new user_Info
             {
                 UID = id,
                 Email = email,
