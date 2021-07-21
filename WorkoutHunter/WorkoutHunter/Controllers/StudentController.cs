@@ -44,13 +44,13 @@ namespace WorkoutHunter.Controllers
 
             // 宣告變數
             Verifier V = new Verifier();
-            userInfo data = null;
+            user_Info data = null;
             string userPsw = "";
             var query = from o in _context.user_info
                         where o.Email == user.Email
                         select o;
 
-            foreach (userInfo item in query)
+            foreach (user_Info item in query)
             {
                 if (item.Email == user.Email)
                     data = item;
@@ -80,7 +80,6 @@ namespace WorkoutHunter.Controllers
                         ExpiresUtc = DateTimeOffset.UtcNow.AddSeconds(10)
                     });
 
-                    HttpContext.Session.SetString("Role", data.Role);
 
                     // 驗證成功
                     return Redirect("/Home/Index");

@@ -331,16 +331,6 @@ C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\R
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\Student\Login.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\Student\Sign.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\Student\test.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\userS\Create.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\userS\Delete.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\userS\Details.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\userS\Edit.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\userS\Index.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\user\Create.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\user\Delete.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\user\Details.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\user\Edit.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\user\Index.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\WorkoutHunter.RazorTargetAssemblyInfo.cache

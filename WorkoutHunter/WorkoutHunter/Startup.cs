@@ -28,12 +28,11 @@ namespace WorkoutHunter
         {
             services.AddControllersWithViews();
             services.AddDbContext<userContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LinkToDb")));
-            services.AddSession();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>
                 {
                     option.Cookie.HttpOnly = true;
-                    option.AccessDeniedPath = "/Student";
+                    option.AccessDeniedPath = "/Home/index";
                     option.LoginPath = "/Student/Login";
                     option.LogoutPath = "/Student/LogOut";
                 });
@@ -54,7 +53,6 @@ namespace WorkoutHunter
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

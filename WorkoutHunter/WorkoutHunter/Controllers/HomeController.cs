@@ -26,14 +26,9 @@ namespace WorkoutHunter.Controllers
             return View();
         }
 
-        //[Authorize(Roles = "C")]
+        [Authorize(Roles = "C")]
         public IActionResult Privacy()
         {
-            string role = HttpContext.Session.GetString("Role");
-            if (role != "C")
-            {
-                return View("Index");
-            }
 
             return View();
         }

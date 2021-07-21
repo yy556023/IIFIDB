@@ -14,7 +14,7 @@ namespace WorkoutHunter.Models
         [RegularExpression("[a-zA-Z0-9_]*@.*")]
         public string Email { get; set; }
         [Required]
-        [RegularExpression("[a-zA-Z0-9_&%$^#?=]*")]
+        [RegularExpression("[a-zA-Z0-9_]*")]
         public string Password { get; set; }
     }
 }
