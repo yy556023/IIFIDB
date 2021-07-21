@@ -11,6 +11,7 @@
         <td>身分</td>
         <td>註冊日期</td>
         <td>RANK</td>
+        <td>加密</td>
     </tr>
     @foreach (var item in Model)
     {
@@ -21,6 +22,7 @@
             <td>@item.Role</td>
             <td>@item.SignDate</td>
             <td>@item.Class</td>
+            <td>@item.salt</td>
         </tr>
     }
 
