@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[skill](
 	[SkillName] [nvarchar](10) NULL,
 	[SkillDamage] [int] NULL,
 	[CD] [int] NULL,
+	[needPoint] [int] NULL,
 	[SkillPic] [nvarchar](10) NULL,
  CONSTRAINT [PK_skill] PRIMARY KEY CLUSTERED
 (
