@@ -11,35 +11,130 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Lab_05.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
+        private IMemoryCache _cache;
         private readonly ILogger<HomeController> _logger;
         private workouthunterContext _context;
 
-        public HomeController(ILogger<HomeController> logger, workouthunterContext context)
+        public HomeController(ILogger<HomeController> logger, workouthunterContext context, IMemoryCache memoryCache)
         {
+            _cache = memoryCache;
             _context = context;
             _logger = logger;
         }
-        public IActionResult defense()
+        public async Task<IActionResult> Logout()
         {
-            return BadRequest();
+            await HttpContext.SignOutAsync();
+
+            return Redirect("/");
+        }
+        public IActionResult Index()
+        {
+
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult Forgot()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult Check(string Com)
+        {
+            MyCache cache;
+            if (_cache.TryGetValue("Email", out cache))
+            {
+                EmailWorker emailwroker = new EmailWorker()
+                {
+                    Com = Com,
+                    Key = cache.K,
+                };
+                if (emailwroker.disCom() && cache.U == emailwroker.UID)
+                {
+                    // ================================
+                    // ///////////修改密碼//////////////
+                    // ================================
+                    // 編碼 -> 產生salt > 混和密碼
+                    Verifier V = new Verifier();
+                    byte[] salt = V.createSalt();
+                    string Psw = V.createHash(cache.Password, salt);
+                    string Salt = Convert.ToBase64String(salt);
+                    // 放入資料庫 -> salt與編碼後的密碼取代原本的資料
+                    var query = from o in _context.UserInfos
+                                where o.Uid == cache.U
+                                select o;
+                    UserInfo G = query.FirstOrDefault();
+                    
+                    if (G != null)
+                    {
+                        G.PassWord = Psw;
+                        G.Salt = Salt;
+                        _context.SaveChanges();
+                    }
+                    // ================================
+                    // ////////////////////////////////
+                    // ================================
+                    _cache.Remove("Email");
+                    return Content("認證及修改成功!!");
+                }
+            }
+            return Content("認證失敗");
         }
         [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
-
-        public async Task<IActionResult> Logout()
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult Forgot(string Email, string Password)
         {
-            await HttpContext.SignOutAsync();
+            MyCache myCache;
+            // 確認帳號存在
+            var user = (from o in _context.UserInfos
+                        where o.Email == Email
+                        select o).FirstOrDefault();
+            if (user == null)
+            {
+                return Content("無此信箱的使用者資料");
+            }
+            // 若緩存還存在
+            if (_cache.TryGetValue("Email", out myCache))
+            {
+                return Content("認證信已寄出，不得重複寄出");
+            }
+            // 若此緩存不存在 > 寄出認證信
+            else
+            {
+                myCache = new MyCache();
+                EmailWorker emailworker = new EmailWorker()
+                {
+                    addressee = "ub1213go@gmail.com",
+                    sendEmail = "ub1213gogo@gmail.com",
+                    sendPassword = "Online12",
+                    subject = "註冊認證",
+                    UID = user.Uid,
+                };
+                emailworker.mixUid();
+                string str = emailworker.Com.Replace("+", "%2B");
 
-            return Redirect("/");
+                emailworker.content = " <a href='https://localhost:44389/home/Check?Com=" + str + "'>認證點我</a> ";
+
+                myCache.C = emailworker.Com;
+                myCache.U = emailworker.UID;
+                myCache.K = emailworker.Key;
+                myCache.Password = Password;
+                _cache.Set("Email", myCache, TimeSpan.FromSeconds(60));
+
+                emailworker.MailSend();
+                return Content("認證信已寄出");
+            }
         }
         [HttpPost]
         [AllowAnonymous]
@@ -47,7 +142,7 @@ namespace Lab_05.Controllers
         {
             // 格式不正確返回錯誤
             if (!ModelState.IsValid)
-                return BadRequest();
+                return Content("格式錯誤");
 
             // 宣告變數
             Verifier V = new Verifier();
@@ -83,11 +178,9 @@ namespace Lab_05.Controllers
                     {
                         //是否可以被刷新
                         AllowRefresh = false,
-                        // 設置了一個 1 天 有效期的持久化 cookie
                         IsPersistent = true,
                         ExpiresUtc = DateTimeOffset.UtcNow.AddSeconds(10)
                     });
-
                     
                     // 驗證成功
                     return Redirect("/");
@@ -95,11 +188,11 @@ namespace Lab_05.Controllers
                 }
                 // 密碼錯誤
                 else
-                    return BadRequest();
+                    return Content("密碼錯誤");
             }
             // 帳號不存在
             else
-                return BadRequest();
+                return Content("帳號不存在");
 
 
             //============================================================
@@ -109,18 +202,11 @@ namespace Lab_05.Controllers
             Console.WriteLine(str);
             //============================================================
         }
-       
-        public IActionResult Index()
-        {
-
-            return View();
-        }
         [Authorize(Roles = "C")]
         public IActionResult Privacy()
         {
             return View();
         }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

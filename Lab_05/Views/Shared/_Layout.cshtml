@@ -25,17 +25,21 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
                             </li>
                             <li class="nav-item align-self-center">
-                                <div> Welcome @User.Claims.Where(x=>x.ToString().Contains("ID")).FirstOrDefault() </div>
+                                <div> Welcome @User.Claims.Where(x => x.ToString().Contains("ID")).FirstOrDefault() </div>
                             </li>
                         }
                         else
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Forgot">忘記密碼</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                             </li>

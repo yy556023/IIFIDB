@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Lab_05.Models;
+
 namespace Lab_05
 {
     public class Startup
@@ -28,14 +29,14 @@ namespace Lab_05
         {
             services.AddControllersWithViews();
             services.AddDbContext<workouthunterContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DbContext")));
-
+            services.AddMemoryCache();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>
                 {
                     option.Cookie.HttpOnly = true;
-                    option.AccessDeniedPath = "/Home/defense";
+                    option.AccessDeniedPath = "/Home/index";
                     option.LoginPath = "/Home/Login";
-                    option.LogoutPath = "/Home/Logout";
+                    option.LogoutPath = "/Home/LogOut";
                 });
         }
 
@@ -63,7 +64,7 @@ namespace Lab_05
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=index}/{id?}");
             });
         }
     }

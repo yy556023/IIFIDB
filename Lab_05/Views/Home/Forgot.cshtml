@@ -1,0 +1,48 @@
+﻿@*@using Lab_05.Models
+<h3>Current Time: @DateTime.Now.TimeOfDay.ToString()</h3>
+<p>ComString: @(ViewData["cacheEntry"] == null ? "No cached entry found" : ((ViewData["cacheEntry"] as CX).C))</p>
+
+
+<p>
+    Key: 
+    @foreach (var item in ((ViewData["cacheEntry"] as CX).K))
+    {
+        <span>@(item.ToString() + ",")</span>
+    }
+</p>*@
+
+<form action="/home/Forgot" method="post" id="form">
+    <label>帳號</label>
+    <input name="Email" type="text" />
+    <br />
+    <label>密碼</label>
+    <input id="Password" name="Password" type="text"/>
+    <br />
+    <label>確認密碼</label>
+    <input id="toPass" name="toPass" type="text" />
+    <br />
+    <input id="sub" type="submit" value="送出">
+</form>
+
+<script>
+    var A = document.querySelector("#Password");
+    var B = document.querySelector("#toPass");
+    var C = document.querySelector("#sub");
+    var D = document.querySelector("#form");
+    var node = document.createElement("div");
+    var i = 1;
+
+    document.querySelector("#sub").addEventListener("click", function (e) {
+        if (A.value != B.value) {
+            if (!D.contains(node)) {
+                node.innerText = `密碼不一樣喔!! - ${i}`;
+                D.append(node);
+            } else {
+                i++;
+                node.innerText = `密碼不一樣喔!! - ${i}`;
+            }
+            e.preventDefault();
+        }
+    }, false);
+
+</script>
