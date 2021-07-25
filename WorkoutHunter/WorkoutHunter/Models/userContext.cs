@@ -14,9 +14,9 @@ namespace WorkoutHunter.Models
 
         }
 
-        public DbSet<user_Info> user_info { get; set; }
+        public DbSet<userInfo> user_info { get; set; }
 
-        public DbSet<user_Status> user_status { get; set; }
+        public DbSet<userStatus> user_status { get; set; }
 
     }
 }

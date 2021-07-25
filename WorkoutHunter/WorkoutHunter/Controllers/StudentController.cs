@@ -13,6 +13,7 @@ using System.Security.Claims;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace WorkoutHunter.Controllers
 {
@@ -21,12 +22,16 @@ namespace WorkoutHunter.Controllers
     {
         private readonly ILogger<StudentController> _logger;
         private readonly userContext _context;
+        private IMemoryCache _cache;
 
-        public StudentController(ILogger<StudentController> logger, userContext context)
+        public StudentController(ILogger<StudentController> logger, userContext context, IMemoryCache memoryCache)
         {
             _context = context;
             _logger = logger;
+            _cache = memoryCache;
         }
+
+    //=========================【07/21 註冊登入系統整合】===============================================================================
 
         [AllowAnonymous]
         public IActionResult Login()
@@ -44,13 +49,13 @@ namespace WorkoutHunter.Controllers
 
             // 宣告變數
             Verifier V = new Verifier();
-            user_Info data = null;
+            userInfo data = null;
             string userPsw = "";
             var query = from o in _context.user_info
                         where o.Email == user.Email
                         select o;
 
-            foreach (user_Info item in query)
+            foreach (userInfo item in query)
             {
                 if (item.Email == user.Email)
                     data = item;
@@ -94,12 +99,12 @@ namespace WorkoutHunter.Controllers
                 return BadRequest();
 
 
-            //============================================================
+//============================================================================================================================================================================
             // 顯示結果
             string str =
                 $"Email: {user.Email} Password: {user.Password} {ModelState.IsValid} \n 比對Email: {data.Email} 比對密碼: {data.PassWord} \n 輸入的hash密碼: {userPsw}";
             Console.WriteLine(str);
-            //============================================================
+//============================================================================================================================================================================
         }
 
         public async Task<IActionResult> Logout()
@@ -132,7 +137,7 @@ namespace WorkoutHunter.Controllers
             byte[] usersalt = V.createSalt();
 
             // 新增一筆資料的物件
-            user_Info sign = new user_Info
+            userInfo sign = new userInfo
             {
                 UID = V.UID(),
                 Email = email,
@@ -149,6 +154,105 @@ namespace WorkoutHunter.Controllers
             //return Content(id);
             return View("Index", await _context.user_info.ToListAsync());
         }
+    //=========================【07/21 註冊登入系統整合】===============================================================================
+
+    //=========================【07/24 信箱驗證連結整合】===============================================================================
+        [AllowAnonymous]
+        public IActionResult Check(string Com)
+        {
+            MyCache cache;
+            if (_cache.TryGetValue("Email", out cache))
+            {
+                EmailWorker emailworker = new EmailWorker()
+                {
+                    Com = Com,
+                    Key = cache.K,
+                };
+                if (emailworker.disCom() && cache.U == emailworker.UID)
+                {
+                    // ================================
+                    // ///////////修改密碼//////////////
+                    // ================================
+                    // 編碼 -> 產生salt > 混和密碼
+                    Verifier V = new Verifier();
+                    byte[] salt = V.createSalt();
+                    string Psw = V.createHash(cache.Password, salt);
+                    string Salt = Convert.ToBase64String(salt);
+                    // 放入資料庫 -> salt與編碼後的密碼取代原本的資料
+                    var query = from o in _context.user_info
+                                where o.Uid == cache.U
+                                select o;
+                    UserInfo G = query.FirstOrDefault();
+
+                    if (G != null)
+                    {
+                        G.PassWord = Psw;
+                        G.Salt = Salt;
+                        _context.SaveChanges();
+                    }
+                    // ================================
+                    // ////////////////////////////////
+                    // ================================
+                    _cache.Remove("Email");
+                    return Content("認證及修改成功!!");
+                }
+            }
+            return Content("認證失敗");
+        }
+
+        [AllowAnonymous]
+        public IActionResult Forgot()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult Forgot(string Email, string Password)
+        {
+            MyCache myCache;
+            // 確認帳號存在
+            var user = (from o in _context.user_info
+                        where o.Email == Email
+                        select o).FirstOrDefault();
+            if (user == null)
+            {
+                return Content("無此信箱的使用者資料");
+            }
+            // 若緩存還存在
+            if (_cache.TryGetValue("Email", out myCache))
+            {
+                return Content("認證信已寄出，不得重複寄出");
+            }
+            // 若此緩存不存在 > 寄出認證信
+            else
+            {
+                myCache = new MyCache();
+                EmailWorker emailworker = new EmailWorker()
+                {
+                    addressee = "yy556023@gmail.com",
+                    sendEmail = "yy215308@gmail.com",
+                    sendPassword = "kk215308",
+                    subject = "註冊認證",
+                    UID = user.Uid,
+                };
+                emailworker.mixUid();
+                string str = emailworker.Com.Replace("+", "%2B");
+
+                emailworker.content = " <a href='https://localhost:44389/home/Check?Com=" + str + "'>認證點我</a> ";
+
+                myCache.C = emailworker.Com;
+                myCache.U = emailworker.UID;
+                myCache.K = emailworker.Key;
+                myCache.Password = Password;
+                _cache.Set("Email", myCache, TimeSpan.FromSeconds(60));
+
+                emailworker.MailSend();
+                return Content("認證信已寄出");
+            }
+        }
+
+    //=========================【07/24整合】===============================================================================
 
         public IActionResult Index()
         {
