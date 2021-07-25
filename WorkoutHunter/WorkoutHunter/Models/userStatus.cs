@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WorkoutHunter.Models
 {
-    public class user_Status
+    public class userStatus
     {
         [Key]
         public string UID { get; set; }

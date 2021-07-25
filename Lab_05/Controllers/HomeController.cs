@@ -115,9 +115,9 @@ namespace Lab_05.Controllers
                 myCache = new MyCache();
                 EmailWorker emailworker = new EmailWorker()
                 {
-                    addressee = "ub1213go@gmail.com",
-                    sendEmail = "ub1213gogo@gmail.com",
-                    sendPassword = "Online12",
+                    addressee = "yy556023@gmail.com",
+                    sendEmail = "yy215308@gmail.com",
+                    sendPassword = "kk215308",
                     subject = "註冊認證",
                     UID = user.Uid,
                 };
