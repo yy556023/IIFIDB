@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered</title>
+    <link rel="stylesheet" href="~/home/CSS/cRegistered.css">
+
+</head>
+<body>
+    <form action="/home/Register" method="post">
+        <div class="con">
+            <header class="head-form">
+                <h2>註冊</h2>
+            </header>
+            <h2 class="identity">
+                身分別：
+                <input type="radio" name="role" value="S"><label for="stu">學員</label>
+                <input type="radio" name="role" value="C"><label for="coach">教練</label>
+            </h2>
+
+            <br>
+
+            <div class="field-set">
+                <div class="row1">
+                    帳號/信箱：
+                    <span class="inputBox">
+                        <input type="text" name="email" id="txtName" placeholder="輸入信箱" />
+                </div>
+
+                <!--   Password -->
+                <div class="row2">
+                    密码：
+                    <span class="inputBox">
+                        <input type="text" name="password" id="txtPwd" placeholder="請輸入密码" />
+                </div>
+                <div class="row3">
+                    確認密码：
+                    <span class="inputBox">
+                        <input type="text" name="repassword" id="txtPwd" placeholder="請再次輸入密码" />
+                </div>
+            </div>
+            <!--      button LogIn -->
+            <button class="log-in">Sign in</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <link href ="main.css" rel="stylesheet" type="text/css"> -->
+
+    <title>Main</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+    <!-- include rpgui -->
+    <link href="~/student/main.css" rel="stylesheet" type="text/css">
+    <script src="~/student/main.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div id="myCanvus">
+
+        <div class="Rank">
+            <div id="rankIcon">
+                <img src="~/student/img/ring.png" id="ringImg">
+                <div id="rankLV">
+                    <p>Rank SSS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="topLeft">
+        <div id="idNum">
+            <p>ID:Obelisk</p>
+        </div>
+        <div id="money">
+            <p>$:66666</p>
+        </div>
+    </div>
+
+
+    <div class="topCenter">
+        <div id="str">
+            <p>STR:4000</p>
+        </div>
+        <div id="vit">
+            <p>VIT:4000</p>
+        </div>
+        <div id="agi">
+            <p>AGI:????</p>
+        </div>
+    </div>
+
+    <div class="equitmentLeft">
+        <div id="eq1">
+            <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='block';">
+                <div id="eq_bg"></div>
+            </a>
+        </div>
+        <div id="eq2">
+            <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='block';">
+                <div id="eq_bg"></div>
+            </a>
+        </div>
+        <div id="eq3">
+            <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='block';">
+                <div id="eq_bg"></div>
+            </a>
+        </div>
+    </div>
+
+    <div class="equitmentRight">
+        <div id="eq4">
+            <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='block';">
+                <div id="eq_bg"></div>
+            </a>
+        </div>
+        <div id="eq5">
+            <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='block';">
+                <div id="eq_bg"></div>
+            </a>
+        </div>
+        <div id="eq6">
+            <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='block';">
+                <div id="eq_bg"></div>
+            </a>
+        </div>
+    </div>
+
+    <div class="LeftObj">
+        <div id="itemBox">
+            <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='block';">
+                <img id="boxImg" src="~/student/img/box.png">
+            </a>
+
+            <div id="openBag" class="rpgui-content">
+
+                <div class="rpgui-container framed rpgui-draggable" id="inventory">
+
+                    <div style="height: 10%;"><a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='none';">Close</a></div>
+                    <div class="selectBar">
+                        <select class="rpgui-dropdown">
+                            <option selected>Potion</option>
+                            <option>Weapon</option>
+                            <option>Sheild</option>
+                            <option>Scroll</option>
+                            <option>Item</option>
+                        </select>
+                    </div>
+
+                    <hr />
+
+                    <div class="rpgui-icon empty-slot">
+                        <div class="item_001">
+                            <div class="disc">
+                                <div class="rpgui-container framed-grey" style="width:100%; height:100%; left:0px; top:0px;">
+                                    <label>POWER UP YOUR STR!!!</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rpgui-icon empty-slot">
+                        <div class="item_002">
+                            <div class="disc">
+                                <div class="rpgui-container framed-grey" style="width:100%; height:100%; left:0px; top:0px;">
+                                    <label>POWER UP YOUR VTI!!!</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <br /><br />
+
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <br /><br />
+
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <br /><br />
+
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <br /><br />
+
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <div class="rpgui-icon empty-slot"></div>
+                    <br /><br />
+                </div>
+            </div>
+        </div>
+
+        <div id="News">
+            <a href="javascript:void(0)" onclick="document.getElementById('openNew').style.display='block';">
+                <img id="scrollImg" src="~/student/img/scroll.png">
+            </a>
+
+            <div id="openNew" class="rpgui-content">
+                <div class="rpgui-container framed rpgui-draggable" id="inventory">
+                    <div>
+                        <a href="javascript:void(0)" onclick="document.getElementById('openNew').style.display='none'">Close</a>
+                    </div>
+                    <hr>
+                    <div>
+                        just write something here to see
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Shop">
+            <img id="shopImg" src="~/student/img/shop.png">
+        </div>
+    </div>
+
+    <div class="RightObj">
+        <div id="Training">
+
+        </div>
+
+        <a href="/student/SkillTree">
+            <div id="skillTree"></div>
+        </a>
+
+        <div id="setting"></div>
+    </div>
+
+    <div class="Adv">
+        <button class="rpgui-button" id="AdvBtn" type="button" style="width:100%">
+            <p>Adventure!!</p>
+        </button>
+    </div>
+
+    <div id="charImg">
+        <img src="~/student/img/char_magician.png" style="height: 60%; top:15% ;left:7%;position: absolute;">
+    </div>
+    </div>
+
+</body>
+</html>

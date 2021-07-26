@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="~/home/CSS/bLogin.css">
+    <script src="~/home/JS/bLogin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+
+<body>
+    <div class="overlay">
+        <form action="/home/Login" method="post">
+            <div class="con">
+                <header class="head-form">
+                    <h2>Log In</h2>
+                </header>
+                <h2 class="identity">
+                    身分別：
+                    <input type="radio" name="identity" value="stu"><label for="stu">學員</label>
+                    <input type="radio" name="identity" value="coach"><label for="coach">教練</label>
+                </h2>
+                <br>
+                <div class="field-set">
+                    <!--   user name -->
+                    <span class="input-item">
+                        <i class="fa fa-user-circle"></i>
+                    </span>
+
+                    <!--   user name Input-->
+                    <input class="form-input" name="Email" id="txt-input" type="text" placeholder="請輸入帳號" required>
+
+                    <br>
+
+                    <!--   Password -->
+                    <span class="input-item">
+                        <i class="fa fa-key"></i>
+                    </span>
+
+                    <!--   Password Input-->
+                    <input class="form-input" type="password" placeholder="請輸入密碼" id="pwd" name="Password" required>
+
+
+                    <br>
+                    <!--        buttons -->
+                    <!--      button LogIn -->
+                    <button class="log-in">Log In</button>
+                </div>
+
+                <!--   other buttons -->
+                <div class="other">
+                    <!--      Forgot Password button-->
+                    <button class="btn submits frgt-pass"><a href="/home/ForgotPassword">忘記密碼</a></button>
+                    <!--     Sign Up button -->
+                    <button class="btn submits sign-up">
+                        <a href="/home/Register">註冊</a>
+                        <!--         Sign Up font icon -->
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <!--   End Conrainer  -->
+            </div>
+
+            <!-- End Form -->
+        </form>
+    </div>
+</body>
+
+</html>
