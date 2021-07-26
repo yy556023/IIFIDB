@@ -8,9 +8,7 @@ namespace WorkoutHunterV2.Models.DbModels
 {
     public partial class WorkoutHunterContext : DbContext
     {
-        public WorkoutHunterContext()
-        {
-        }
+       
 
         public WorkoutHunterContext(DbContextOptions<WorkoutHunterContext> options)
             : base(options)
@@ -24,6 +22,7 @@ namespace WorkoutHunterV2.Models.DbModels
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<UserInfo> UserInfos { get; set; }
         public virtual DbSet<UserStatus> UserStatuses { get; set; }
+        public DbSet<ForIndex> forindex { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -184,7 +183,6 @@ namespace WorkoutHunterV2.Models.DbModels
                     .HasConstraintName("FK_user_status_user_info");
             });
 
-            OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

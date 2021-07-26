@@ -25,7 +25,14 @@ namespace WorkoutHunterV2.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            string UID = User.Claims.Where(p => p.Type == "ID").FirstOrDefault().Value;
+
+            var test = (from o in _context.forindex
+                             where o.Uid == UID
+                             select o).FirstOrDefault();
+
+
+            return View(test);
         }
         public IActionResult SkillTree()
         {
