@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model string 
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -56,6 +58,10 @@
                 <!--   other buttons -->
                 <div class="other">
                     <!--      Forgot Password button-->
+                    @if(Model != null)
+                    {
+                        <p style="font-size:24px;color:red;">@Model</p>
+                    }
                     <button class="btn submits frgt-pass"><a href="/home/ForgotPassword">忘記密碼</a></button>
                     <!--     Sign Up button -->
                     <button class="btn submits sign-up">

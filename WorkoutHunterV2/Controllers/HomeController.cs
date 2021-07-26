@@ -42,7 +42,7 @@ namespace WorkoutHunterV2.Controllers
         {
             // 格式不正確返回錯誤
             if (!ModelState.IsValid)
-                return Content("格式錯誤的頁面");
+                return View("Login", "格式錯誤，請輸入正確格式");
 
             // 宣告變數
             Verifier V = new Verifier();
@@ -87,11 +87,12 @@ namespace WorkoutHunterV2.Controllers
                 }
                 // 密碼錯誤
                 else
-                    return Content("密碼錯誤的頁面");
+                    return View("Login", "帳號或密碼錯誤");
             }
             // 帳號不存在
             else
-                return Content("帳號不存在的頁面");
+                return View("Login", "帳號或密碼錯誤");
+
         }
 
         public IActionResult Register()
@@ -143,12 +144,12 @@ namespace WorkoutHunterV2.Controllers
                         select o).FirstOrDefault();
             if (user == null)
             {
-                return Content("無此信箱的使用者資料");
+                return View("ForgotPassword", "無此信箱的使用者資料");
             }
             // 若緩存還存在
             if (_cache.TryGetValue("UserLoginInfo", out myCache))
             {
-                return Content("認證信已寄出，不得重複寄出");
+                return View("ForgotPassword", "認證信已寄出，不得重複寄出");
             }
             // 若此緩存不存在 > 寄出認證信
             else
@@ -172,7 +173,7 @@ namespace WorkoutHunterV2.Controllers
                 _cache.Set("UserLoginInfo", myCache, TimeSpan.FromSeconds(60));
 
                 emailworker.MailSend();
-                return Content("認證信已寄出");
+                return View("ForgotPassword", "認證信已寄出");
             }
         }
         public IActionResult CheckEmail(string Key)
