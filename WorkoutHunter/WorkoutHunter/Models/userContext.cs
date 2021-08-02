@@ -18,5 +18,7 @@ namespace WorkoutHunter.Models
 
         public DbSet<userStatus> user_status { get; set; }
 
+        public DbSet<ForIndex> forindex { get; set; }
+
     }
 }

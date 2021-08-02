@@ -36,7 +36,11 @@ namespace WorkoutHunter.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return View();
+            ForIndex test = (from o in _context.forindex
+                             where o.UID == "B5b165PNvx"
+                             select o).FirstOrDefault();
+
+            return Content(test.UID.ToString());
         }
 
         [HttpPost]
@@ -180,14 +184,14 @@ namespace WorkoutHunter.Controllers
                     string Salt = Convert.ToBase64String(salt);
                     // 放入資料庫 -> salt與編碼後的密碼取代原本的資料
                     var query = from o in _context.user_info
-                                where o.Uid == cache.U
+                                where o.UID == cache.U
                                 select o;
-                    UserInfo G = query.FirstOrDefault();
+                    userInfo G = query.FirstOrDefault();
 
                     if (G != null)
                     {
                         G.PassWord = Psw;
-                        G.Salt = Salt;
+                        G.salt = Salt;
                         _context.SaveChanges();
                     }
                     // ================================
@@ -234,12 +238,12 @@ namespace WorkoutHunter.Controllers
                     sendEmail = "yy215308@gmail.com",
                     sendPassword = "kk215308",
                     subject = "註冊認證",
-                    UID = user.Uid,
+                    UID = user.UID,
                 };
                 emailworker.mixUid();
                 string str = emailworker.Com.Replace("+", "%2B");
 
-                emailworker.content = " <a href='https://localhost:44389/home/Check?Com=" + str + "'>認證點我</a> ";
+                emailworker.content = " <a href='https://localhost:44354/Student/Check?Com=" + str + "'>認證點我</a> ";
 
                 myCache.C = emailworker.Com;
                 myCache.U = emailworker.UID;

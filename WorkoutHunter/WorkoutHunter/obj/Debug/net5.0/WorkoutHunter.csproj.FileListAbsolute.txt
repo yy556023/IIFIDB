@@ -458,3 +458,4 @@ C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\bin\Debug\net5.0\r
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\WorkoutHunter.Views.pdb
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\WorkoutHunter.csproj.CopyComplete
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\WorkoutHunter.genruntimeconfig.cache
+D:\Documents\repo\IIFIDB\WorkoutHunter\WorkoutHunter\obj\Debug\net5.0\Razor\Views\Student\Forgot.cshtml.g.cs
