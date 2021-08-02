@@ -64,9 +64,9 @@
                     <h5 class="modal-title" id="exampleModalLabel">訓練結果</h5>
                 </div>
                 <div class="modal-body text-center" id="reMsg">
-                    上肢+5 <br />
-                    核心+2 <br />
-                    下肢+2
+                    上肢 +0 <br />
+                    核心 +0 <br />
+                    下肢 +0
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-primary close" onclick="modalClose()">確認</button>
@@ -98,9 +98,9 @@
         var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
         connection.on("@Model.Uid", function (str, vit, agi) {
-        document.getElementById("reMsg").innerHTML = `上肢+ ${str} <br />
-                        核心+ ${vit} <br />
-                        下肢+ ${agi}`;
+        document.getElementById("reMsg").innerHTML = `上肢 +${str} <br />
+                        核心 +${vit} <br />
+                        下肢 +${agi}`;
         });
 
         connection
