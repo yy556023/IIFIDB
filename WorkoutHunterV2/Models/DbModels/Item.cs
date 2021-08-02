@@ -12,5 +12,6 @@ namespace WorkoutHunterV2.Models.DbModels
         public string ItemInfo { get; set; }
         public string ItemPic { get; set; }
         public string Buff { get; set; }
+        public int? CostMoney { get; set; }
     }
 }

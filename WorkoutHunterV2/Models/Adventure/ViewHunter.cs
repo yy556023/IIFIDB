@@ -28,9 +28,15 @@ namespace WorkoutHunterV2.Models.Adventure
 
         public ViewHunter(CHunterData HunterData, string SavePoint, in List<Skill> querySkills, in List<Item> queryItems)
         {
+<<<<<<< HEAD
             ADCoefficient = 1;
             HPCoefficient = 5;
             ASCoefficient = 1000;
+=======
+            ADCoefficient = 10;
+            HPCoefficient = 10;
+            ASCoefficient = 500;
+>>>>>>> bf41df21e5fe8c2912a7e03b6f831d48b0de92c2
             Str = HunterData.Str ?? 0;
             Agi = HunterData.Agi ?? 0;
             Vit = HunterData.Vit ?? 0;

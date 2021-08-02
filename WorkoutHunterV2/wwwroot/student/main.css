@@ -1220,7 +1220,10 @@ p {
 .selectBar {
     position: absolute;
     width: 35%;
+<<<<<<< HEAD
     height: 100%;
+=======
+>>>>>>> bf41df21e5fe8c2912a7e03b6f831d48b0de92c2
     left: 55%;
     top: 3%;
 
@@ -1237,15 +1240,6 @@ p {
 .item_001 {
     width: 100%;
     height: 100%;
-    background-image: url(./img/icons/potion-red.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.item_002 {
-    width: 100%;
-    height: 100%;
-    background-image: url(./img/icons/potion-green.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -1254,9 +1248,6 @@ p {
     display: block;
 }
 
-.item_002:hover .disc {
-    display: block;
-}
 
 
 
@@ -1424,6 +1415,7 @@ p {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-image: url("img/icons/potion-slot.png");
+<<<<<<< HEAD
 }
 
 #skill_col {
@@ -1438,6 +1430,22 @@ p {
     background-image: url("img/icons/magic-slot.png");
 }
 
+=======
+}
+
+#skill_col {
+    position: absolute;
+    width: 25%;
+    height: 90%;
+    left: 60%;
+    top: 5%;
+    display: inline-block;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url("img/icons/magic-slot.png");
+}
+
+>>>>>>> bf41df21e5fe8c2912a7e03b6f831d48b0de92c2
 
 
 

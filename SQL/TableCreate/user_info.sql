@@ -16,6 +16,7 @@ CREATE TABLE [dbo].[user_info](
 	[SignDate] [varchar](10) NULL,
 	[Class] [char](1) NULL,
 	[salt] [varchar](50) NULL,
+	[PT] [char](10) NULL,
  CONSTRAINT [PK_user_Info] PRIMARY KEY CLUSTERED
 (
 	[UID] ASC

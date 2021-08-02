@@ -287,7 +287,11 @@
             if (rqs.responseText == "OK")
                 history.go(0)
         }
+<<<<<<< HEAD
         rqs.open("POST", "/Adventure/NewRound");
+=======
+        rqs.open("POST", "/Adventure/NewRound"); 
+>>>>>>> bf41df21e5fe8c2912a7e03b6f831d48b0de92c2
         rqs.setRequestHeader('Content-type', 'application/json');
         rqs.send(JSON.stringify(data));
         ////

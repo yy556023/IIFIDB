@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -96,7 +96,7 @@ namespace WorkoutHunterV2.Controllers
                     {
                         return RedirectToAction("Index", "Student");// 到登入後的第一頁，自行決定
                     }
-                    
+
                 }
                 // 密碼錯誤
                 else
@@ -130,7 +130,7 @@ namespace WorkoutHunterV2.Controllers
                 TempData["errorMsg"] = "請選擇註冊的角色";
                 return View();
             }
-            
+
             Verifier V = new Verifier();
 
             byte[] usersalt = V.createSalt();
@@ -186,11 +186,11 @@ namespace WorkoutHunterV2.Controllers
                     subject = "註冊認證",
                     UID = user.Uid,
                 };
-                
+
                 string str = emailworker.RondomSTR().Replace("+", "%2B");
                 emailworker.content = " <a href='https://localhost:44370/home/CheckEmail?Key=" + str + "'>認證點我</a> ";
 
-                
+
                 myCache.U = emailworker.UID;
                 myCache.K = emailworker.Key;
                 _cache.Set("UserLoginInfo", myCache, TimeSpan.FromSeconds(60));
@@ -209,7 +209,7 @@ namespace WorkoutHunterV2.Controllers
                     // 認證許可，修改密碼頁面
                     return View();
                 }
-                    
+
             }
             // 認證過期頁面
             return View("ForgotPassword", "認證頁面已過期");

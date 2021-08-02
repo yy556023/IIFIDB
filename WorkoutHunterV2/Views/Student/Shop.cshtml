@@ -1,0 +1,153 @@
+﻿@using WorkoutHunterV2.Models.DbModels
+@model List<Item>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>workout</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="~/student/css/bootstrap.min.css" rel="stylesheet">
+        <link href="~/student/js/bootstrap.min.js" rel="stylesheet">
+        <link href="~/student/dist/rpgui.min.css" rel="stylesheet" type="text/css">
+        <script src="~/student/dist/rpgui.min.js"></script>
+
+        <style>
+            body {
+                background-color: rgba(0, 0, 0, .6);
+                background-blend-mode: multiply;
+                background-size: cover;
+            }
+
+            .nav_div {
+                height: 85vh;
+                border-image-width: 1.5vh;
+                border-width: 1.5vh;
+                box-sizing: border-box;
+                border-image-repeat: repeat;
+                padding: 2vh;
+                border-style: solid;
+                border-image-source: url("/student/dist/img/border-image-golden.png");
+                border-image-slice: 4 4 4 4;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                background: url("/student/dist/img/background-image-golden.png") center;
+                background-clip: padding-box;
+                background-origin: padding-box;
+            }
+
+            .boder_div {
+                border-image-width: 1vh;
+                border-width: 1vh;
+                box-sizing: border-box;
+                border-image-repeat: repeat;
+                padding: 2vh;
+                border-style: solid;
+                border-image-source: url("/student/dist/img/border-image.png");
+                border-image-slice: 4 4 4 4;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                background: url("/student/dist/img/background-image-grey.png") center;
+                background-clip: padding-box;
+                background-origin: padding-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            .rpgFont {
+                color: white;
+                text-shadow: 2px black;
+                font-family: 'Press Start 2P';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Press Start 2P'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7o3uGXJk6cuEylToZ-uuaubQ.ttf) format('truetype')
+            }
+
+            .commodity_div {
+                height: 70vh;
+                overflow: auto;
+            }
+
+            .img {
+                image-rendering: optimize-contrast; /* CSS3 Proposed  */
+                image-rendering: crisp-edges; /* CSS4 Proposed  */
+                image-rendering: pixelated; /* CSS4 Proposed  */
+                -ms-interpolation-mode: nearest-neighbor;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-10 nav_div m-4 w-75">
+                    <div class="row">
+                        <div class="col-12 commodity_div">
+                            <div class="row row-cols-1 row-cols-md-5 g-4">
+                                <!--(row-cols-md-5)change how many commodity in one line -->
+                                <!-- copy start here -->
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col">
+                                        <div class="card boder_div">
+                                            <img src="~/student/xMallPic/@item.ItemPic" class="img">
+                                            <div class="card-body rpgFont">
+                                                @item.ItemInfo
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                
+                                <!-- copy end here for one -->
+                            </div>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn rpgui-button rpgFont" onclick="modalBtn()">
+                                OK
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content boder_div rpgFont">
+                    <div class="modal-header justify-content-center">
+                        <h5 class="modal-title" id="exampleModalLabel">確認購買</h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        購買品項
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary">確認</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="~/student/js/popper.min.js"></script>
+        <script src="~/student/js/bootstrap.min.js"></script>
+
+        <script>
+
+            function modalBtn() {
+                var modalElement = new bootstrap.Modal(document.getElementById('exampleModal'), {
+                    keyboard: false
+                })
+                modalElement.show()
+            }
+
+
+
+        </script>
+    </body>
+
+</html>

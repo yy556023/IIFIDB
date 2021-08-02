@@ -20,5 +20,6 @@ namespace WorkoutHunterV2.Models.DbModels
         public int? Money { get; set; }
         public int? rawPoint { get; set; }
         public int? nowSkill { get; set; }
+
     }
 }
