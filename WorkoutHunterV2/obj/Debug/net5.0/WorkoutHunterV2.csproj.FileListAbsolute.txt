@@ -55,10 +55,16 @@ C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\scopedcss\bun
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.TagHelpers.input.cache
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.TagHelpers.output.cache
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.RazorCoreGenerate.cache
+C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\CheckEmail.cshtml.g.cs
+C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\ForgotPassword.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
+C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\Register.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\Index.cshtml.g.cs
+C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\SkillTree.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.RazorTargetAssemblyInfo.cache
@@ -69,11 +75,8 @@ C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunter
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\ref\WorkoutHunterV2.dll
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.pdb
 C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.genruntimeconfig.cache
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\Register.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\ForgotPassword.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\Index.cshtml.g.cs
-C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\SkillTree.cshtml.g.cs
+C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\PasswordChange.cshtml.g.cs
+C:\Users\ub\Desktop\github\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Adventure\Index.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\bin\Debug\net5.0\appsettings.Development.json
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\bin\Debug\net5.0\appsettings.json
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\bin\Debug\net5.0\WorkoutHunterV2.exe
@@ -117,7 +120,6 @@ D:\Documents\repo\IIFIDB\WorkoutHunterV2\bin\Debug\net5.0\runtimes\win-x86\nativ
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.csproj.AssemblyReference.cache
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.GeneratedMSBuildEditorConfig.editorconfig
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.AssemblyInfoInputs.cache
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.AssemblyInfo.cs
@@ -131,6 +133,8 @@ D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\scopedcss\bundle\Worko
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.TagHelpers.input.cache
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.TagHelpers.output.cache
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.RazorCoreGenerate.cache
+D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Adventure\Index.cshtml.g.cs
+D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\CheckEmail.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\ForgotPassword.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Home\Login.cshtml.g.cs
@@ -139,6 +143,7 @@ D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Shared\Err
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\Index.cshtml.g.cs
+D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\PasswordChange.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\SkillTree.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
@@ -150,3 +155,7 @@ D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.dll
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\ref\WorkoutHunterV2.dll
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.pdb
 D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.genruntimeconfig.cache
+D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Coach\Index.cshtml.g.cs
+D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\Razor\Views\Student\PowerUp.cshtml.g.cs
+D:\Documents\repo\IIFIDB\WorkoutHunterV2\obj\Debug\net5.0\WorkoutHunterV2.csproj.AssemblyReference.cache
+D:\Documents\repo\IIFIDB\WorkoutHunterV2\bin\Debug\net5.0\libman.json

@@ -1,0 +1,247 @@
+﻿@model List<WorkoutHunterV2.Models.DbModels.UserInfo>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./css/Coach.css"> -->
+    <link rel="stylesheet" href="~/coach/newCoach.css" />
+    <script src="~/coach/jquery.js"></script>
+    <link rel="stylesheet" href="~/coach/bootstrap.min.css" />
+    <script src="~/coach/bootstrap.min.js"></script>
+    <script src="~/coach/popper.min.js"></script>
+    <style type="text/css">
+        .bglmg {
+            width: 100%;
+            height: 100vh;
+            background-image: url(/coach/img/背景2.png);
+            background-size: cover;
+            z-index: 1;
+            overflow-y: auto;
+            max-width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="bglmg">
+        <div class="container-fluid containerSet">
+            <div class="row row-cols-lg-2" id="fillrow">
+                <div class="col-sm-2 col-lg-2 col-xl-2" style="align-items: center; text-align: center">
+                    <nav class="navbar navbar-dark" id="navbarTitle">
+                        <div class="container-fluid">
+                            <button class="navbar-toggler"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#navbarToggleExternalContent"
+                                    aria-controls="navbarToggleExternalContent"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation "
+                                    style="position: relative; color: rgb(87, 85, 85); background: rgb(87, 85, 85); width: 530px">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+                    </nav>
+                    <div class="collapse" id="navbarToggleExternalContent">
+                        <div class="t" style="text-align: center">
+                            <h5 class="text-white h4" style="margin-bottom: 0px; background: rgb(15, 209, 209); width: 100%">學員</h5>
+                            <div id="uid" style="display:none;"></div>
+                            <ul id="stList" class="students" style="list-style-type: none; padding-left: 0px; margin-bottom: 0px">
+
+                                @foreach (var item in Model)
+                                {
+                                    <li class="student">
+                                        <button class="tablinks" onclick="student_display(event, '@item.Uid', '@item.userPic')" id="defaultOpen">
+                                            @item.Name
+                                        </button>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <!-- 設定(齒輪) -->
+                        <button id="setbtn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <img src="/coach/img/settings.png" alt="" style="width: 100px; height: 100px; align-items: center" />
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-lg-4 col-xl-3">
+                    <div class="row">
+                        <div>
+                            <!-- 學生照片存取區(被選取到會顯示,其它的隱藏) -->
+                            <div>
+                                @foreach (var item in Model)
+                                {
+                                    <div id="@item.userPic" class="studentImg">
+                                        <div class="student_x_Img" style="display: inline-block">
+                                            <img src="/coach/img/@item.userPic" alt="" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="student_imgBox">
+                                <!-- 學生照片顯示區 -->
+                                <div></div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; align-items: center">
+                            <!-- 學員名稱名稱存取區(被選取到會顯示,其它的隱藏)(在照片下的框框顯示) -->
+                            <div class="StudentsNameStorehouse">
+                                @foreach (var item in Model)
+                                {
+                                    <div id="@item.Uid" class="studentContent">@item.Name</div>
+                                }
+                            </div>
+                            <div class="student_x"><!-- 被選取的學員名稱出現之區域(方框) --></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-6 col-xl-7" style="align-items: center; text-align: center">
+                    <div class="StudentInformationOut">
+                        <form action="" method="post" id="StudentInformation">
+                            <div style="padding-bottom: 2%; border-bottom: 2px white solid">
+                                <h1>學生資訊</h1>
+                            </div>
+
+                            <!-- 上肢 -->
+                            <br /><br />
+                            <div class="row">
+                                <div class="col-sm-3 StudentContentFormat">
+                                    <h2>上肢</h2>
+                                </div>
+                                <div class="col-sm-7 studentPointColumn">
+                                    <input class="st_input" id="n1" name="Strength" />
+                                    <!--上肢值數 -->
+                                </div>
+                            </div>
+                            <br /><br /><br /><br />
+                            <!-- 核心 -->
+                            <div class="row">
+                                <div class="col-sm-3 StudentContentFormat">
+                                    <h2>核心</h2>
+                                </div>
+                                <div class="col-sm-7 studentPointColumn">
+                                    <input class="st_input" id="n2" name="Vitality" />
+                                    <!--核心值數 -->
+                                </div>
+                            </div>
+                            <br /><br /><br /><br />
+                            <!-- 下肢 -->
+                            <div class="row">
+                                <div class="col-sm-3 StudentContentFormat">
+                                    <h2>下肢</h2>
+                                </div>
+                                <div class="col-sm-7 studentPointColumn">
+                                    <input class="st_input" id="n3" name="Agility" />
+                                    <!--下肢值數 -->
+                                </div>
+                            </div>
+                            <br /><br /><br />
+                            <!-- 懲罰天數 -->
+                            <div class="row">
+                                <!-- <div class="col-sm-3 StudentContentFormat" style="display:inline;">
+                                    <h2>懲罰天數</h2>
+                                </div><br>
+                                <div class="col-sm-5 " style="display:inline;">
+                                    <input type="text" name="Penaltydays" style="text-align: center;width: 100%; " >
+                                </div><br><br> -->
+                                <div class="col-sm-12" style="display: inline">
+                                    <div class="col-12" style="justify-content: center; text-align: center">
+                                        <div>
+                                            <button type="button"
+                                                    id="select_determine"
+                                                    class="btn btn-primary btn-lg"
+                                                    data-toggle="modal"
+                                                    data-target="#exampleModalCenter"
+                                                    >
+                                                確定
+                                            </button>
+                                            <button class="btn btn-danger btn-lg" id="select_cancel">取消</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <script src="~/coach/count.js"></script>
+                <script src="~/coach/Coach.js"></script>
+            </div>
+        </div>
+    </div>
+
+    <!-- 案設定(齒輪)之後出現隻畫面(Bootstrap) -->
+    <div class="modal fade"
+         id="staticBackdrop"
+         data-bs-backdrop="static"
+         data-bs-keyboard="false"
+         tabindex="-1"
+         aria-labelledby="staticBackdropLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="text-align: center; width: 760px">
+                        <h5 class="modal-title" id="staticBackdropLabel" style="display: inline-block">系統設定</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 0%"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <input type="button"
+                               name="Submit"
+                               value="註冊學員"
+                               class="btn btn-brown btn-primary"
+                               onclick="location.href='./newCoachRegistered.html'" />
+                        <button class="btn btn-brown btn-primary" type="button">帳號登出</button>
+                        <button class="btn btn-brown btn-primary" type="button">修改密碼</button>
+                    </div>
+                    <br /><br />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="exit" class="btn btn-primary" data-bs-dismiss="modal">離開</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script>
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+
+        connection
+            .start()
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+
+        document.getElementById("select_determine").addEventListener("click", function (event) {
+            var str = document.getElementById("n1").value;
+            var vit = document.getElementById("n2").value;
+            var agi = document.getElementById("n3").value;
+            var uid = document.getElementById("uid").innerText;
+
+            connection
+                .invoke("SendMessage", uid, str, vit, agi)
+                .then(function () {
+                    document.getElementById("n1").value = "";
+                    document.getElementById("n2").value = "";
+                    document.getElementById("n3").value = "";
+                })
+                .catch(function (err) {
+                    return console.error(err.toString());
+                });
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html>

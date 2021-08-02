@@ -11,7 +11,7 @@ GO
 CREATE TABLE [dbo].[game_progress](
 	[UID] [char](10) NOT NULL,
 	[StartTime] [nvarchar](20) NULL,
-	[CPoint] [int] NULL,
+	[SavePoint] [varchar] (50) NULL,
  CONSTRAINT [PK_game_progress] PRIMARY KEY CLUSTERED
 (
 	[UID] ASC

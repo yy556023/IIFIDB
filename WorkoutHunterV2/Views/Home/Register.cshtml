@@ -26,23 +26,25 @@
                 <div class="row1">
                     帳號/信箱：
                     <span class="inputBox">
-                        <input type="text" name="email" id="txtName" placeholder="輸入信箱" />
+                        <input type="text" name="Email" id="txtName" placeholder="輸入信箱" />
                 </div>
 
                 <!--   Password -->
                 <div class="row2">
                     密码：
                     <span class="inputBox">
-                        <input type="text" name="password" id="txtPwd" placeholder="請輸入密码" />
+                        <input type="text" name="Password" id="txtPwd" placeholder="請輸入密码" />
                 </div>
                 <div class="row3">
                     確認密码：
                     <span class="inputBox">
-                        <input type="text" name="repassword" id="txtPwd" placeholder="請再次輸入密码" />
+                        <input type="text" name="rePassword" id="txtPwd" placeholder="請再次輸入密码" />
                 </div>
             </div>
             <!--      button LogIn -->
+        <div style="width: 100%; text-align: center; font-size: 16px; color: red;">@TempData["errorMsg"]</div>
             <button class="log-in">Sign in</button>
     </form>
 </body>
+
 </html>

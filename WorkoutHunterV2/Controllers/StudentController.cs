@@ -10,6 +10,8 @@ using WorkoutHunterV2.Models.DbModels;
 using WorkoutHunterV2.Models.Student;
 using WorkoutHunterV2.Models.Home;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 
 namespace WorkoutHunterV2.Controllers
 {
@@ -38,7 +40,6 @@ namespace WorkoutHunterV2.Controllers
         {
             // 讀取會員UID -> 從 Cookie 取得
             // ============================
-            
             string UID = User.Claims.Where(p => p.Type == "ID").FirstOrDefault().Value;
             // ============================
 
@@ -87,17 +88,51 @@ namespace WorkoutHunterV2.Controllers
 
             return View(_skillViewModel);
         }
+        public IActionResult PasswordChange()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult PasswordChange(CUserPasswordChange user)
+        {
+            string msg;
+            if (!ModelState.IsValid)
+            {
+                msg = "密碼格式不正確";
+                TempData["errorMsg"] = msg;
+                return PasswordChange();
+            }
+            if(user.Password != user.rePassword)
+            {
+                msg = "密碼與確認密碼不一致";
+                TempData["errorMsg"] = msg;
+                return PasswordChange();
+            }
+            Verifier V = new Verifier();
+            string UID = User.Claims.Where(p => p.Type == "ID").FirstOrDefault().Value;
+            var query = (from o in _context.UserInfos
+                        where o.Uid == UID
+                        select o).FirstOrDefault();
+            if(query.PassWord == V.createHash(user.Password, Convert.FromBase64String(query.Salt)))
+            {
+                msg = "新密碼與原密碼不得重複";
+                TempData["errorMsg"] = msg;
+                return PasswordChange();
+            }
+            byte[] b = V.createSalt();
+            query.Salt = Convert.ToBase64String(b);
+            query.PassWord = V.createHash(user.Password, b);
+            _context.SaveChanges();
+            
+            return Redirect("/Home/Logoff");
+        }
         [HttpPost]
         public async void SkillSaveChange()
         {
 
             // 讀取會員UID->從 Cookie 取得
             // ============================
-
-            // 先假設UID
-            string UID = "B5b165PNvx";
-
-            // <<待寫完整 ...>>
+            string UID = User.Claims.Where(p => p.Type == "ID").FirstOrDefault().Value;
             // ============================
 
             var b = await Request.BodyReader.ReadAsync();
@@ -175,6 +210,15 @@ namespace WorkoutHunterV2.Controllers
 
                 if (valid) _context.SaveChanges();
             }
+        }
+
+        public async Task<IActionResult> PowerUp()
+        {
+            string UID = User.Claims.Where(p => p.Type == "ID").FirstOrDefault().Value;
+
+            var query = _context.UserInfos.Where(o => o.Uid == UID);
+
+            return View(await query.FirstOrDefaultAsync());
         }
     }
 }

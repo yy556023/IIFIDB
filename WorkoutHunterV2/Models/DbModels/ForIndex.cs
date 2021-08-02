@@ -14,7 +14,6 @@ namespace WorkoutHunterV2.Models.DbModels
         public int? Strength { get; set; }
         public int? Vitality { get; set; }
         public int? Agility { get; set; }
-        public int? PunishDay { get; set; }
         public string Items { get; set; }
         public string Skills { get; set; }
         public string ChaPic { get; set; }

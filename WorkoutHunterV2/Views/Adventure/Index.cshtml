@@ -1,0 +1,301 @@
+﻿@model WorkoutHunterV2.Models.Adventure.ViewModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Monster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./js/bootstrap.min.js" rel="stylesheet">
+    <link href="./dist/rpgui.min.css" rel="stylesheet" type="text/css">
+
+
+
+    <style type="text/css">
+        body {
+            background-image: url(./image/BG5.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -o-background-size: 100% 100%, auto;
+            -moz-background-size: 100% 100%, auto;
+            -webkit-background-size: 100% 100%, auto;
+            background-size: 100% 100%, auto;
+        }
+
+        .header_div {
+            height: 12vh;
+        }
+
+        .nav_div {
+            height: 65vh;
+        }
+
+            .nav_div > img {
+                height: 65vh;
+            }
+
+        .info_div {
+            border-image-width: 1.5vh;
+            border-width: 1.5vh;
+            box-sizing: border-box;
+            border-image-repeat: repeat;
+            padding: 2vh;
+            border-style: solid;
+            border-image-source: url(./dist/img/border-image-golden.png);
+            border-image-slice: 4 4 4 4;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            background: url(./dist/img/background-image-golden.png) center;
+            background-clip: padding-box;
+            background-origin: padding-box;
+        }
+
+        .footer_div {
+            height: 22vh;
+        }
+
+        p {
+            margin: 2vh;
+        }
+
+
+        .endInfo_div {
+            color: white;
+            text-shadow: 1px black;
+            font-family: 'Press Start 2P';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Press Start 2P'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7o3uGXJk6cuEylToZ-uuaubQ.ttf) format('truetype')
+        }
+
+        .skillBtn1 {
+            position: absolute;
+            background-image: url(./image/skill.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            right: 5%;
+            bottom: 4%;
+            height: 9vh;
+            width: 10vh;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="rpgui-content">
+            <div class="center_div">
+                <div class="row">
+                    <div class="col-12 header_div">
+                        <div id="hp-bar" class="rpgui-progress red "></div>
+                        @* 後端新增 id="ShowStage" *@
+                        <p id="ShowStage" class="font_s">Stage:</p>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                    </div>
+                    <div class="col-lg-6 col-12 nav_div">
+                        <img src="./image/DRG1.gif" alt="lost" class="img-fluid  rounded mx-auto d-block" id="monImg">
+                    </div>
+                    <div class="col-12">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-10 col-12"></div>
+                                <div class="col-md-2 col-12 ">
+                                    <button class="skillBtn1 info_div footer_div" id="skillBtn"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row px-2 g-2">
+                            <div class="col-md-5 col-12 info_div footer_div">
+                                <div id="stamina-bar" class="rpgui-progress green"></div>
+                                @* 後端新增 id="ShowDPS" *@
+                                <p id="ShowDPS">DPS:</p>
+
+                            </div>
+                            <div class="col-md-4 col-12">
+                            </div>
+                            <div class="col-md-2 col-12">
+                            </div>
+                            <div class="col-md-1 col-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content endInfo_div info_div">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="exampleModalLabel">Result</h5>
+                </div>
+                <div id="money" class="modal-body text-center">
+                    <img src="./image/coin-去背.png" alt="" style="height: 5vh;">
+                    Coin:10
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn rpgui-button" onclick="reflash1()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./dist/rpgui.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+
+    @* 後端新增 START*@
+    <div hidden id="monsterMaxHP">@Model.VM.maxHP</div>
+    <div hidden id="monsterNowHP">@Model.VM.HP</div>
+    <div hidden id="monsterDamage">@Model.VM.AD</div>
+    <div hidden id="monImgName">@Model.VM.Pic</div>
+    <div hidden id="monMoney">@Model.VM.Money</div>
+    <div hidden id="playerMaxHP">@Model.VH.maxHP</div>
+    <div hidden id="playerNowHP">@Model.VH.HP</div>
+    <div hidden id="playerDPS">@Model.VH.DPS</div>
+    <div hidden id="skillDamage">@Model.VH.NowSkill.DmgSkill</div>
+    <div hidden id="skillCD">@Model.VH.NowSkill.CD</div>
+    <div hidden id="skillImgName">@Model.VH.NowSkill.PicSkill</div>
+    <div hidden id="Stage">@Model.VM.CPoint</div>
+    @* 後端新增 END*@
+
+<script>
+    //For DB data use
+    //-------------------
+    var monsterMaxHP = parseInt(document.querySelector("#monsterMaxHP").innerText);
+    var monsterNowHP = parseInt(document.querySelector("#monsterNowHP").innerText);
+    var monsterDamage = parseInt(document.querySelector("#monsterDamage").innerText);
+    var monImgName = document.querySelector("#monImgName").innerText;
+    var monMoney = parseInt(document.querySelector("#monMoney").innerText);
+    var playerMaxHP = parseInt(document.querySelector("#playerMaxHP").innerText);
+    var playerNowHP = parseInt(document.querySelector("#playerNowHP").innerText);
+    var playerDPS = parseInt(document.querySelector("#playerDPS").innerText);
+    var skillDamage = parseInt(document.querySelector("#skillDamage").innerText);
+    var skillCD = parseInt(document.querySelector("#skillCD").innerText);
+    var skillImgName = document.querySelector("#skillImgName").innerText;
+    var Stage = parseInt(document.querySelector("#Stage").innerText);
+    //--------------------
+
+    // 後端新增 START
+    //console.log(`monsterMaxHP ${monsterMaxHP}`);
+    //console.log(`monsterNowHP ${monsterNowHP}`);
+    //console.log(`monsterDamage ${monsterDamage}`);
+    //console.log(`monImgName ${monImgName}`);
+    //console.log(`playerMaxHP ${playerMaxHP}`);
+    //console.log(`playerNowHP ${playerNowHP}`);
+    //console.log(`playerDPS ${playerDPS}`);
+    //console.log(`skillDamage ${skillDamage}`);
+    //console.log(`skillCD ${skillCD}`);
+    //console.log(`skillImgName ${skillImgName}`);
+    //console.log(`Stage ${Stage}`)
+    document.querySelector("#ShowStage").innerText = `Stage: ${Stage}`;
+    document.querySelector("#ShowDPS").innerText = `DPS: ${playerDPS}`;
+    document.querySelector("#skillBtn").style.backgroundImage = `url(/student/img/skill_icon/${skillImgName})`;
+    document.querySelector("#monImg").setAttribute("src", `./image/${monImgName}`);
+    document.querySelector("#money").innerText = `Coin: ${monMoney}`;
+
+    var monHpCounter = (monsterNowHP / monsterMaxHP).toFixed(2);
+    var playerHpCounter = (playerNowHP / playerMaxHP).toFixed(2);
+    var playerDamagePercentage = (playerDPS / monsterMaxHP).toFixed(2);
+    var monsterDamagePercentage = (monsterDamage / playerMaxHP).toFixed(2);
+    var skillDamagePercentage = (skillDamage / monsterMaxHP).toFixed(2);
+    window.onload = function () {
+        hpBarUpdate(playerHpCounter, "stamina-bar")
+        hpBarUpdate(monHpCounter, "hp-bar")
+    }
+    // 後端新增 END
+    var skillCDms = skillCD * 1000;
+    var mon = window.setInterval("monHpCnt()", 1000);  //controll monster attack speed(ms)
+    var player = window.setInterval("playerHpCnt()", 5000);  //controll player attack speed(ms)
+
+    $(document).ready(function () {
+
+        $("#skillBtn").click(function () {
+            monHpCounter = monHpCounter - skillDamagePercentage;
+            $("#skillBtn").prop('disabled', true);
+            console.log('disable')
+            setTimeout(function () {
+                $("#skillBtn").prop('disabled', false);
+                console.log('enable')
+            }, skillCDms)
+        })
+
+
+    });
+
+    function monHpCnt() {
+        if (monHpCounter - playerDamagePercentage <= 0) {
+            hpBarUpdate(0, "hp-bar")
+            //後端新增
+            Stage++;
+            ////
+            endOfBattle();
+        }
+        else {
+            monHpCounter = monHpCounter - playerDamagePercentage;
+            hpBarUpdate(monHpCounter, "hp-bar")
+        }
+    }
+
+    function playerHpCnt() {
+        if (playerHpCounter - monsterDamagePercentage <= 0) {
+            hpBarUpdate(0, "stamina-bar")
+            //後端新增
+            Stage--;
+            monMoney = 0;
+            ////
+            endOfBattle();
+        }
+        else {
+            playerHpCounter = playerHpCounter - monsterDamagePercentage;
+            hpBarUpdate(playerHpCounter, "stamina-bar")
+        }
+        
+    }
+
+    function hpBarUpdate(HpCounter, controll) {
+        var progress = document.getElementById(controll);
+        RPGUI.set_value(progress, HpCounter);
+    }
+
+    function endOfBattle() {
+        $("#monImg").fadeTo(3000, 0);
+        var modalElement = new bootstrap.Modal(document.getElementById('exampleModal'), {
+            keyboard: false
+        })
+        modalElement.show()
+        window.clearInterval(mon)
+        window.clearInterval(player)
+    }
+
+    function reflash1() {
+        // 後端新增
+        data = {
+            Stage: Stage,
+            Money: monMoney,
+        };
+        rqs = new XMLHttpRequest();
+        rqs.onload = function () {
+            console.log(rqs.responseText);
+            if (rqs.responseText == "OK")
+                history.go(0)
+        }
+        rqs.open("POST", "/Adventure/NewRound");
+        rqs.setRequestHeader('Content-type', 'application/json');
+        rqs.send(JSON.stringify(data));
+        ////
+    }
+
+
+</script>
+
+</body>
+
+</html>

@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using WorkoutHunterV2.Models.DbModels;
 using WorkoutHunterV2.Models.Student;
+using WorkoutHunterV2.Models.Adventure;
+using WorkoutHunterV2.Hubs;
 
 namespace WorkoutHunterV2
 {
@@ -34,10 +36,11 @@ namespace WorkoutHunterV2
                 {
                     option.Cookie.HttpOnly = true;
                     option.AccessDeniedPath = "/Home/index";
-                    option.LoginPath = "/Student/index";
-                    option.LogoutPath = "/Home/Login";
+                    option.LoginPath = "/Home/Login";
+                    option.LogoutPath = "/Home/Logoff";
                 });
             services.AddTransient(typeof(ViewSkillTreeModel));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +69,7 @@ namespace WorkoutHunterV2
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }

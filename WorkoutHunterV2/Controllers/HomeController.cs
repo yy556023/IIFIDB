@@ -35,10 +35,12 @@ namespace WorkoutHunterV2.Controllers
         }
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+                return Redirect("/Student/Index");
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(User user)
+        public async Task<IActionResult> Login(User user, string ReturnUrl)
         {
             // 格式不正確返回錯誤
             if (!ModelState.IsValid)
@@ -79,11 +81,22 @@ namespace WorkoutHunterV2.Controllers
                         AllowRefresh = false,
                         // 設置了一個 1 天 有效期的持久化 cookie
                         IsPersistent = true,
-                        ExpiresUtc = DateTimeOffset.UtcNow.AddSeconds(60)
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddHours(3)
                     });
 
-
-                    return Redirect("/Student/Index");
+                    if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);// 導到原始要求網址
+                    }
+                    else if(data.Role == "C")
+                    {
+                        return RedirectToAction("Index", "Coach");// 到登入後的第一頁，自行決定
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Student");// 到登入後的第一頁，自行決定
+                    }
+                    
                 }
                 // 密碼錯誤
                 else
@@ -100,14 +113,24 @@ namespace WorkoutHunterV2.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(string email, string password, string repassword, string role)
+        public IActionResult Register(User newUser, string rePassword, string role)
         {
-            if (password != repassword)
+            if (!ModelState.IsValid)
             {
-                TempData["miss"] = "<script>alert('密碼不一致')</script>";
+                TempData["errorMsg"] = "帳號或密碼格式錯誤";
                 return View();
             }
-
+            if (newUser.Password != rePassword)
+            {
+                TempData["errorMsg"] = "密碼不一致";
+                return View();
+            }
+            if(role == null)
+            {
+                TempData["errorMsg"] = "請選擇註冊的角色";
+                return View();
+            }
+            
             Verifier V = new Verifier();
 
             byte[] usersalt = V.createSalt();
@@ -116,8 +139,8 @@ namespace WorkoutHunterV2.Controllers
             UserInfo sign = new UserInfo
             {
                 Uid = V.UID(),
-                Email = email,
-                PassWord = V.createHash(password, usersalt),
+                Email = newUser.Email,
+                PassWord = V.createHash(newUser.Password, usersalt),
                 Role = role,
                 SignDate = DateTime.Now.ToString("yyyy/MM/dd"),
                 Class = "D",
@@ -182,11 +205,44 @@ namespace WorkoutHunterV2.Controllers
             if (_cache.TryGetValue("UserLoginInfo", out cache))
             {
                 if (Convert.ToBase64String(cache.K) == Key)
+                {
                     // 認證許可，修改密碼頁面
-                    return Content("認證許可，修改密碼頁面");
+                    return View();
+                }
+                    
             }
             // 認證過期頁面
-            return Content("認證過期頁面");
+            return View("ForgotPassword", "認證頁面已過期");
+        }
+        [HttpPost]
+        public IActionResult CheckEmail(CUserPasswordEdit UserPasswordEdit)
+        {
+            MyCache cache;
+            if (!ModelState.IsValid)
+            {
+                return View("CheckEmail", "密碼格式錯誤");
+            }
+            if(_cache.TryGetValue("UserLoginInfo", out cache))
+            {
+                Verifier V = new Verifier();
+                UserPasswordEdit.UID = cache.U;
+                var query = (from o in _context.UserInfos
+                            where o.Uid == UserPasswordEdit.UID
+                            select o).FirstOrDefault();
+                byte[] salt = V.createSalt();
+                string password = V.createHash(UserPasswordEdit.Password, salt);
+
+                query.Salt = Convert.ToBase64String(salt);
+                query.PassWord = password;
+                _context.SaveChanges();
+                _cache.Remove("UserLoginInfo");
+            }
+            return Redirect("Login");
+        }
+        public async Task<IActionResult> Logoff()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

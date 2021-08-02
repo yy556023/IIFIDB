@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE [dbo].[user_info](
 	[UID] [char](10) NOT NULL,
-	[Email] [nvarchar](20) NULL,
+	[Email] [nvarchar](50) NULL,
 	[PassWord] [nvarchar](50) NULL,
 	[Role] [char](1) NULL,
 	[SignDate] [varchar](10) NULL,

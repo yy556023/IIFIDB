@@ -80,10 +80,10 @@
                 x.disabled=true;
                 var y = document.getElementById("sk2");
                 y.disabled=false;
-                var z = document.getElementById("sk5");
-                z.disabled=false;
-                var v = document.getElementById("sk8");
-                v.disabled=false;
+                //var z = document.getElementById("sk5");
+                //z.disabled=false;
+                //var v = document.getElementById("sk8");
+                //v.disabled=false;
 
                 var act = document.getElementById("sk1_act");
                 act.disabled=false;    
@@ -150,9 +150,9 @@
                 cnt=cnt-pt4;
                 var x = document.getElementById("sk4");
                 x.disabled=true;
-	            }    
                 var act = document.getElementById("sk4_act");
-                act.disabled=false;                   
+                act.disabled=false;                 
+	            }    
                 var divData=document.getElementById("ptNum");
                 divData.innerText=cnt;
                 });
@@ -185,12 +185,13 @@
                 var x = document.getElementById("sk6");
                 x.disabled=true;
                 var y = document.getElementById("sk7");
-                y.disabled=false;
-	            }
+                y.disabled = false;
+
                 var act = document.getElementById("sk6_act");
                 act.disabled=false;  
                 var e0 = document.querySelector('#up6_7');
                 e0.style.backgroundColor = "white";                      
+	            }
                 var divData=document.getElementById("ptNum");
                 divData.innerText=cnt;
                 });
@@ -202,9 +203,9 @@
                 cnt=cnt-pt7;
                 var x = document.getElementById("sk7");
                 x.disabled=true;
-	            }  
                 var act = document.getElementById("sk7_act");
                 act.disabled=false;                      
+	            }  
                 var divData=document.getElementById("ptNum");
                 divData.innerText=cnt;
                 
@@ -218,9 +219,9 @@
                 cnt=cnt-pt8;
                 var x = document.getElementById("sk8");
                 x.disabled=true;
-	            }
                 var act = document.getElementById("sk8_act");
                 act.disabled=false;                        
+	            }
                 var divData=document.getElementById("ptNum");
                 divData.innerText=cnt;
                 });      

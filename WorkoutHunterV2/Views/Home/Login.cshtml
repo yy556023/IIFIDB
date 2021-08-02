@@ -23,12 +23,7 @@
                 <header class="head-form">
                     <h2>Log In</h2>
                 </header>
-                <h2 class="identity">
-                    身分別：
-                    <input type="radio" name="identity" value="stu"><label for="stu">學員</label>
-                    <input type="radio" name="identity" value="coach"><label for="coach">教練</label>
-                </h2>
-                <br>
+
                 <div class="field-set">
                     <!--   user name -->
                     <span class="input-item">
@@ -54,14 +49,10 @@
                     <!--      button LogIn -->
                     <button class="log-in">Log In</button>
                 </div>
-
+                <div style="width: 100%; text-align: center; font-size: 16px; color: red;">@Model</div>
                 <!--   other buttons -->
                 <div class="other">
                     <!--      Forgot Password button-->
-                    @if(Model != null)
-                    {
-                        <p style="font-size:24px;color:red;">@Model</p>
-                    }
                     <button class="btn submits frgt-pass"><a href="/home/ForgotPassword">忘記密碼</a></button>
                     <!--     Sign Up button -->
                     <button class="btn submits sign-up">

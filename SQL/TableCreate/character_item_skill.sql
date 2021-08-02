@@ -16,6 +16,7 @@ CREATE TABLE [dbo].[character_item_skill](
 	[Money] [int] NULL,
 	[rawPoint] [int] NULL,
 	[nowSkill] [int] NULL,
+	[nowItem] [int] NULL,
  CONSTRAINT [PK_character_item_skill] PRIMARY KEY CLUSTERED
 (
 	[UID] ASC

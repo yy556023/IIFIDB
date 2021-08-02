@@ -1,0 +1,41 @@
+﻿@model string
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditPassword</title>
+    <link rel="stylesheet" href="~/home/CSS/fEditPassword.css">
+</head>
+
+<body>
+    <div class="con">
+        <header class="head-form">
+            <h2>修改密碼</h2>
+        </header>
+
+        <form action="/home/CheckEmail" method="post">
+            <div class="edpas">
+                <div class="row2">
+                    請輸入新密碼:
+                    <span class="inputBox">
+                        <input type="text" name="Password" id="newpassword1" placeholder="請輸入新密碼" />
+                    </span>
+                </div>
+
+                <div class="row3">
+                    請再輸入一次:
+                    <span class="inputBox">
+                        <input type="text" name="rePassword" id="newpassword2" placeholder="請再輸入一次" />
+                    </span>
+                </div>
+            </div>
+            <button type="submit" class="sendmail"> Send </button>
+        </form>
+    </div>
+</body>
+
+</html>

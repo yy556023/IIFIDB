@@ -18,7 +18,10 @@
 		<hr />
 		<div class="row">
 			<div class="col-6">
-				<ul id="messageList"></ul>
+				<ul id="messageList">
+					<li id="testmsg"></li>
+
+				</ul>
 			</div>
 		</div>
 		<hr />
@@ -42,6 +45,7 @@
 		var li = document.createElement("li");
 		li.textContent = encodedMsg;
 		document.getElementById("messageList").appendChild(li);
+		document.getElementById("testmsg").textContent = encodedMsg;
 	});
 
 	connection

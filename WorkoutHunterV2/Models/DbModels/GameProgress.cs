@@ -9,7 +9,7 @@ namespace WorkoutHunterV2.Models.DbModels
     {
         public string Uid { get; set; }
         public string StartTime { get; set; }
-        public int? Cpoint { get; set; }
+        public string SavePoint { get; set; }
 
         public virtual UserInfo UidNavigation { get; set; }
     }

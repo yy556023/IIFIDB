@@ -64,8 +64,6 @@ namespace WorkoutHunterV2.Models.DbModels
                     .HasColumnName("UID")
                     .IsFixedLength(true);
 
-                entity.Property(e => e.Cpoint).HasColumnName("CPoint");
-
                 entity.Property(e => e.StartTime).HasMaxLength(20);
 
                 entity.HasOne(d => d.UidNavigation)

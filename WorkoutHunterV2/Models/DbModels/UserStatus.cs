@@ -11,7 +11,6 @@ namespace WorkoutHunterV2.Models.DbModels
         public int? Strength { get; set; }
         public int? Vitality { get; set; }
         public int? Agility { get; set; }
-        public int? PunishDay { get; set; }
 
         public virtual UserInfo UidNavigation { get; set; }
     }

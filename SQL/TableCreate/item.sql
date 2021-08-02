@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[item](
 	[ItemName] [nvarchar](20) NULL,
 	[ItemInfo] [nvarchar](50) NULL,
 	[ItemPic] [nvarchar](20) NULL,
+	[Buff] [nchar](50) NULL,
  CONSTRAINT [PK_item] PRIMARY KEY CLUSTERED
 (
 	[IID] ASC
