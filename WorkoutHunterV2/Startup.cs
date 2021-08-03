@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkoutHunterV2.Models;
 using WorkoutHunterV2.Models.DbModels;
 using WorkoutHunterV2.Models.Student;
 using WorkoutHunterV2.Models.Adventure;
@@ -41,6 +42,7 @@ namespace WorkoutHunterV2
                 });
             services.AddTransient(typeof(ViewSkillTreeModel));
             services.AddSignalR();
+            services.AddHostedService<Hosted>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
