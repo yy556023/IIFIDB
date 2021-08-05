@@ -201,16 +201,19 @@ namespace WorkoutHunterV2.Models.Adventure
             StrBuff = 0;
             VitBuff = 0;
             AgiBuff = 0;
-            var query = Items.Where(p => p.Iid == NowItem).FirstOrDefault();
-            int[] ItemBuff = JsonConvert.DeserializeObject<int[]>(query.Buff);
-            if (ItemBuff.Length != 2)
-                throw new Exception("道具Buff字串異常");
-            if (ItemBuff[0] == 1)
-                StrBuff = ItemBuff[1];
-            else if (ItemBuff[0] == 2)
-                VitBuff = ItemBuff[1];
-            else if (ItemBuff[0] == 3)
-                AgiBuff = ItemBuff[1];
+            if(NowItem != 0)
+            {
+                var query = Items.Where(p => p.Iid == NowItem).FirstOrDefault();
+                int[] ItemBuff = JsonConvert.DeserializeObject<int[]>(query.Buff);
+                if (ItemBuff.Length != 2)
+                    throw new Exception("道具Buff字串異常");
+                if (ItemBuff[0] == 1)
+                    StrBuff = ItemBuff[1];
+                else if (ItemBuff[0] == 2)
+                    VitBuff = ItemBuff[1];
+                else if (ItemBuff[0] == 3)
+                    AgiBuff = ItemBuff[1];
+            }
         }
     }
     public class CSkill
@@ -220,10 +223,13 @@ namespace WorkoutHunterV2.Models.Adventure
         public string PicSkill { get; set; }
         public CSkill(int NowSkill, List<Skill> Skills)
         {
-            var query = Skills.Where(p => p.Sid == NowSkill).FirstOrDefault();
-            DmgSkill = query.SkillDamage ?? 0;
-            PicSkill = query.SkillPic;
-            CD = query.Cd ?? 0;
+            if(NowSkill != 0)
+            {
+                var query = Skills.Where(p => p.Sid == NowSkill).FirstOrDefault();
+                DmgSkill = query.SkillDamage ?? 0;
+                PicSkill = query.SkillPic;
+                CD = query.Cd ?? 0;
+            }
         }
     }
     public enum EBuff : byte

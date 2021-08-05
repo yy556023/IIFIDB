@@ -41,7 +41,18 @@
             <!--技能點總量+目前技能  -->
             <div id="sk_pt">
                 point:<div id="ptNum" style="font-size: 100px;">@Model.rawPoint</div>
-                目前技能:<div id="sk_now" style="font-size: 50px;">@Model.Skills.ToList()[Convert.ToInt32(Model.nowSkill - 1)].SkillName</div>
+                @if (Model.nowSkill != 0)
+                {
+                    <div>
+                    目前技能:<div id="sk_now" style="font-size: 50px;">@Model.Skills.ToList()[Convert.ToInt32(Model.nowSkill - 1)].SkillName</div>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        目前技能:<div id="sk_now" style="font-size: 50px;">無技能</div>
+                    </div>
+                }
             </div>
 
             <!-- <div class="half-circle"></div>

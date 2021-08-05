@@ -182,12 +182,11 @@
         <div style="display:none" id="NowItemPic">@ViewBag.NowItem.ItemPic</div>
         <div style="display:none" id="NowItemInfo">@ViewBag.NowItem.ItemInfo</div>
     }
-
     <script>
         // 點擊商城
         function GotoShop() {
             var shop = document.createElement("form");
-            shop.action = "shop";
+            shop.action = "/Student/shop";
             shop.method = "get";
             shop.style.display = "none";
             document.body.appendChild(shop);

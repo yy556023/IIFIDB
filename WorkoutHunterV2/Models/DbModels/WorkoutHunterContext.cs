@@ -42,7 +42,7 @@ namespace WorkoutHunterV2.Models.DbModels
 
                 entity.Property(e => e.ChaPic).HasMaxLength(10);
 
-                entity.Property(e => e.Items).HasMaxLength(50);
+                entity.Property(e => e.Items).HasMaxLength(100);
 
                 entity.Property(e => e.Skills).HasMaxLength(50);
 

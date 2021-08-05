@@ -182,7 +182,7 @@
     var skillImgName = document.querySelector("#skillImgName").innerText;
     var Stage = parseInt(document.querySelector("#Stage").innerText);
     //--------------------
-
+    
     // 後端新增 START
     //console.log(`monsterMaxHP ${monsterMaxHP}`);
     //console.log(`monsterNowHP ${monsterNowHP}`);
@@ -197,7 +197,8 @@
     //console.log(`Stage ${Stage}`)
     document.querySelector("#ShowStage").innerText = `Stage: ${Stage}`;
     document.querySelector("#ShowDPS").innerText = `DPS: ${playerDPS}`;
-    document.querySelector("#skillBtn").style.backgroundImage = `url(/student/img/skill_icon/${skillImgName})`;
+    if (skillImgName == "") document.querySelector("#skillBtn").remove();
+    else document.querySelector("#skillBtn").style.backgroundImage = `url(/student/img/skill_icon/${skillImgName})`;
     document.querySelector("#monImg").setAttribute("src", `./image/${monImgName}`);
     document.querySelector("#money").innerText = `Coin: ${monMoney}`;
 
