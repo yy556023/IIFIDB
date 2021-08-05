@@ -24,7 +24,7 @@ namespace WorkoutHunterV2.Models
         {
             _timer = new Timer(DoWork, null,
                 TimeSpan.Zero,
-                TimeSpan.FromSeconds(60));
+                TimeSpan.FromDays(7));
             return Task.CompletedTask;
         }
 
@@ -38,13 +38,13 @@ namespace WorkoutHunterV2.Models
             {
                 string connectionstring = Configuration.GetConnectionString("LinkToDb");
                 Console.WriteLine("Work");
-                //using (var cn = new SqlConnection(connectionstring))
-                //{
-                    //cn.Open();
-                    //var a = new SqlCommand("exec TA", cn);
-                    //a.ExecuteNonQuery();
-                    //a.Dispose();
-                //}
+                using (var cn = new SqlConnection(connectionstring))
+                {
+                    cn.Open();
+                    var a = new SqlCommand("exec RankProcedure", cn);
+                    a.ExecuteNonQuery();
+                    a.Dispose();
+                }
             }
             Interlocked.Decrement(ref execCount);
         }
