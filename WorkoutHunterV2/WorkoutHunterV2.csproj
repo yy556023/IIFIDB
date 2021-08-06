@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\student\img\cursor\cursor.cur" />
-    <None Include="wwwroot\student\main.js" />
     <None Include="wwwroot\student\rpgui.js" />
     <None Include="wwwroot\student\skill_tree.js" />
   </ItemGroup>

@@ -1225,12 +1225,12 @@ p {
 
 }
 
-#inventory {
+/*#inventory {
     height: 38%;
     width: 21%;
     top: 50px;
     left: 50px;
-}
+}*/
 
 
 .item_001 {
@@ -1238,9 +1238,15 @@ p {
     height: 100%;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+
 }
 
-.item_001:hover .disc {
+.itemIcon {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.item_001:hover .disc{
     display: block;
 }
 
@@ -1366,16 +1372,6 @@ p {
     /* background-color: rgb(130, 209, 209); */
 }
 
-#AdvBtn {
-    position: absolute;
-    width: 20%;
-    height: 70%;
-    top: 15%;
-    margin: 1px;
-    font-family: 'Press Start 2P';
-    font-size: 25px;
-    color: aliceblue;
-}
 
 #bottom_obj {
     position: absolute;

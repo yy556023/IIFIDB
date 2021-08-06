@@ -270,28 +270,70 @@ namespace WorkoutHunterV2.Controllers
             // 角色狀態紀錄 //
             var queryCharacter = _context.CharacterItemSkills.Single(p => p.Uid == UID);
             // 判斷傳回字串 //
-            if (int.Parse(data) == 0)
+            int dataInt = int.Parse(data);
+            bool cancelItem = false;
+            if ( dataInt > 100)
             {
-                // 取消道具裝備 //
-                queryCharacter.NowItem = 0;
-                _context.SaveChanges();
-                return Content("取消道具裝備");
+                cancelItem = true;
+                dataInt -= 100;
             }
 
             // 圖片解析成道具物件 //
+            
             Regex Reg = new Regex("Icon(\\d*).png");
+            int itemId = 0;
+            int OldItemId = queryCharacter.NowItem ?? 0;
             foreach (var item in queryItems)
             {
                 // 用圖片確認道具的ID //
-                if (Reg.Match(item.ItemPic).Groups[1].Value == data)
+                if (Reg.Match(item.ItemPic).Groups[1].Value == dataInt.ToString())
                 {
+                    itemId = item.Iid;
                     // 更新nowItem
-                    queryCharacter.NowItem = item.Iid;
+                    if (cancelItem)
+                    {
+                        queryCharacter.NowItem = 0;
+                    }
+                    else
+                    {
+                        queryCharacter.NowItem = itemId;
+                    }
                     break;
                 }
             }
+            string itemStr = itemId.ToString();
+            string OldItemStr = OldItemId.ToString();
+            if (queryCharacter.Items != null)
+            {
+                Dictionary<string, int> UserItems = JsonConvert.DeserializeObject<Dictionary<string, int>>(queryCharacter.Items);
+                if (cancelItem)
+                {
+                    if (UserItems.ContainsKey(itemStr))
+                        UserItems[itemStr] += 1;
+                    else
+                        UserItems.Add(itemStr, 1);
+                }
+                else
+                {
+                    if (UserItems.ContainsKey(OldItemStr))
+                    {
+                        
+                        UserItems[OldItemStr] += 1;
+                    }
+                    else
+                        UserItems.Add(OldItemStr, 1);
+                    UserItems[itemStr] -= 1;
+                    if (UserItems[itemStr] == 0)
+                        UserItems.Remove(itemStr);
+                }
+                queryCharacter.Items = JsonConvert.SerializeObject(UserItems);
+            }
+            else
+            {
+                queryCharacter.Items = $"{{\"{dataInt}\":1}}";
+            }
             _context.SaveChanges();
-            return Content($"裝備道具 {data}號藥水");
+            return Content($"Work");
         }
 
         public IActionResult Shop()
@@ -315,11 +357,19 @@ namespace WorkoutHunterV2.Controllers
             var query = _context.CharacterItemSkills.Single(p => p.Uid == UID);
             var queryItems = _context.Items.ToList();
             // 背包物品
-            Dictionary<string, int> item = JsonConvert.DeserializeObject<Dictionary<string, int>>(query.Items);
+            Dictionary<string, int> item;
+            if (query == null)
+            {
+                item = JsonConvert.DeserializeObject<Dictionary<string, int>>(query.Items);
+            }
+            else
+            {
+                item = new Dictionary<string, int>();
+            }
             // 總花費
             int totalCostMoney = 0;
             // 確認背包沒滿
-            if (item.Values.Sum() + L.Length > 30)
+            if (item.Values.Sum() + L.Length > 20)
                 return Content("背包滿出來，交易失敗");
             // 新增進背包
             for (int i = 0; i < L.Length; i++)
