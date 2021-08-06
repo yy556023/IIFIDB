@@ -2,7 +2,7 @@
 
 var x = document.getElementsByClassName('rpgui-icon empty-slot')
 for (let i = 0; i < x.length; i++) {
-        x[i].addEventListener("click",function(){
+        x[i].addEventListener("click",function(){           
             var Data = document.getElementById('potion_col')
                 if(Data.firstElementChild!=null){
                     var x_copy = x[i].firstElementChild
@@ -20,7 +20,7 @@ for (let i = 0; i < x.length; i++) {
                     var x_copy = x[i].firstElementChild
                     x[i].firstElementChild.remove();
                     x_copy.style['height']='100%';
-                    x_copy.style['width']='100%';
+                    x_copy.style['width']='100%';                   
                     Data.append(x_copy);
                 }
         })

@@ -182,7 +182,7 @@
     var skillImgName = document.querySelector("#skillImgName").innerText;
     var Stage = parseInt(document.querySelector("#Stage").innerText);
     //--------------------
-
+    
     // 後端新增 START
     //console.log(`monsterMaxHP ${monsterMaxHP}`);
     //console.log(`monsterNowHP ${monsterNowHP}`);
@@ -197,7 +197,8 @@
     //console.log(`Stage ${Stage}`)
     document.querySelector("#ShowStage").innerText = `Stage: ${Stage}`;
     document.querySelector("#ShowDPS").innerText = `DPS: ${playerDPS}`;
-    document.querySelector("#skillBtn").style.backgroundImage = `url(/student/img/skill_icon/${skillImgName})`;
+    if (skillImgName == "") document.querySelector("#skillBtn").remove();
+    else document.querySelector("#skillBtn").style.backgroundImage = `url(/student/img/skill_icon/${skillImgName})`;
     document.querySelector("#monImg").setAttribute("src", `./image/${monImgName}`);
     document.querySelector("#money").innerText = `Coin: ${monMoney}`;
 
@@ -211,14 +212,16 @@
         hpBarUpdate(monHpCounter, "hp-bar")
     }
     // 後端新增 END
-    var skillCDms = skillCD * 1000;
-    var mon = window.setInterval("monHpCnt()", 1000);  //controll monster attack speed(ms)
-    var player = window.setInterval("playerHpCnt()", 5000);  //controll player attack speed(ms)
+    var timeMs = 1000;
+    var skillCDms = skillCD * timeMs;
+    var Game = window.setInterval(function () { game(timeMs) }, timeMs);  //controll monster attack speed(ms)
 
     $(document).ready(function () {
 
         $("#skillBtn").click(function () {
-            monHpCounter = monHpCounter - skillDamagePercentage;
+            // monHpCounter = monHpCounter - skillDamagePercentage;
+            monHpCnt(skillDamagePercentage);
+            // 技能CD
             $("#skillBtn").prop('disabled', true);
             console.log('disable')
             setTimeout(function () {
@@ -230,34 +233,56 @@
 
     });
 
-    function monHpCnt() {
-        if (monHpCounter - playerDamagePercentage <= 0) {
+    var MonAttackSec = 5;
+    var NowSec = 0;
+    function MonAttackCheck() {
+        if (NowSec >= MonAttackSec) {
+            NowSec = 0;
+            return true;
+        }
+        return false;
+    }
+    function game(t) {
+        NowSec += t / 1000;
+        if (monHpCnt(playerDamagePercentage)) return false;
+        if (MonAttackCheck())
+            if (playerHpCnt(monsterDamagePercentage))
+                return false;
+        return true;
+    }
+
+    function monHpCnt(damage) {
+        if (monHpCounter - damage <= 0) {
             hpBarUpdate(0, "hp-bar")
             //後端新增
             Stage++;
             ////
             endOfBattle();
+            return true;
         }
         else {
-            monHpCounter = monHpCounter - playerDamagePercentage;
+            monHpCounter = monHpCounter - damage;
             hpBarUpdate(monHpCounter, "hp-bar")
+            return false;
         }
     }
 
-    function playerHpCnt() {
-        if (playerHpCounter - monsterDamagePercentage <= 0) {
+    function playerHpCnt(damage) {
+        if (playerHpCounter - damage <= 0) {
             hpBarUpdate(0, "stamina-bar")
             //後端新增
             Stage--;
             monMoney = 0;
             ////
             endOfBattle();
+            return true;
         }
         else {
-            playerHpCounter = playerHpCounter - monsterDamagePercentage;
+            playerHpCounter = playerHpCounter - damage;
             hpBarUpdate(playerHpCounter, "stamina-bar")
+            return false;
         }
-        
+
     }
 
     function hpBarUpdate(HpCounter, controll) {
@@ -271,8 +296,7 @@
             keyboard: false
         })
         modalElement.show()
-        window.clearInterval(mon)
-        window.clearInterval(player)
+        window.clearInterval(Game)
     }
 
     function reflash1() {
@@ -287,11 +311,7 @@
             if (rqs.responseText == "OK")
                 history.go(0)
         }
-<<<<<<< HEAD
         rqs.open("POST", "/Adventure/NewRound");
-=======
-        rqs.open("POST", "/Adventure/NewRound"); 
->>>>>>> bf41df21e5fe8c2912a7e03b6f831d48b0de92c2
         rqs.setRequestHeader('Content-type', 'application/json');
         rqs.send(JSON.stringify(data));
         ////

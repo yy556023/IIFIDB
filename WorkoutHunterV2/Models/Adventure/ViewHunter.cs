@@ -36,6 +36,7 @@ namespace WorkoutHunterV2.Models.Adventure
             Vit = HunterData.Vit ?? 0;
             NowItem = new CItem(HunterData.NowItem ?? 0, queryItems);
             NowSkill = new CSkill(HunterData.NowSkill ?? 0, querySkills);
+            
             InitialLoad();
             if (SavePoint != null)
             {
@@ -49,6 +50,7 @@ namespace WorkoutHunterV2.Models.Adventure
             maxHP = (Vit + NowItem.VitBuff) * HPCoefficient;
             HP = maxHP;
             DPS = ((Str + NowItem.StrBuff) * ADCoefficient) * ((Agi + NowItem.AgiBuff) / ASCoefficient);
+            if (NowSkill.DmgSkill != 0) NowSkill.DmgSkill = Convert.ToInt32(DPS / 10) * NowSkill.DmgSkill;
         }
         public void ViewLoad(string PercentHP)
         {

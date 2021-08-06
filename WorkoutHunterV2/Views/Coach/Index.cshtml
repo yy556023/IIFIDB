@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="./css/Coach.css"> -->
     <link rel="stylesheet" href="~/coach/newCoach.css" />
     <script src="~/coach/jquery.js"></script>
     <link rel="stylesheet" href="~/coach/bootstrap.min.css" />
@@ -57,7 +56,7 @@
                                 @foreach (var item in Model)
                                 {
                                     <li class="student">
-                                        <button class="tablinks" onclick="student_display(event, '@item.Uid', '@item.userPic')" id="defaultOpen">
+                                        <button class="tablinks" onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
                                             @item.Name
                                         </button>
                                     </li>
@@ -71,45 +70,31 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-lg-4 col-xl-3">
-                    <div class="row">
-                        <div>
-                            <!-- 學生照片存取區(被選取到會顯示,其它的隱藏) -->
-                            <div>
-                                @foreach (var item in Model)
-                                {
-                                    <div id="@item.userPic" class="studentImg">
-                                        <div class="student_x_Img" style="display: inline-block">
-                                            <img src="/coach/img/@item.userPic" alt="" />
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                            <div class="student_imgBox">
-                                <!-- 學生照片顯示區 -->
-                                <div></div>
-                            </div>
-                        </div>
-                        <div style="text-align: center; align-items: center">
-                            <!-- 學員名稱名稱存取區(被選取到會顯示,其它的隱藏)(在照片下的框框顯示) -->
-                            <div class="StudentsNameStorehouse">
-                                @foreach (var item in Model)
-                                {
-                                    <div id="@item.Uid" class="studentContent">@item.Name</div>
-                                }
-                            </div>
-                            <div class="student_x"><!-- 被選取的學員名稱出現之區域(方框) --></div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="col-sm-6 col-lg-6 col-xl-7" style="align-items: center; text-align: center">
                     <div class="StudentInformationOut">
                         <form action="" method="post" id="StudentInformation">
                             <div style="padding-bottom: 2%; border-bottom: 2px white solid">
                                 <h1>學生資訊</h1>
-                            </div>
-
+                            </div><br>
+                            <!-- 學員 -->
+                            <div class="row">
+                                <div class="col-sm-3 StudentContentFormat">
+                                    <h4>學員姓名：</h4>
+                                </div>
+                                <div class="col-sm-7 studentPointColumn">
+                                    <input class="st_inputName" id="SName" name="Name"
+                                           style=" text-align: center;">
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-sm-3 StudentContentFormat">
+                                    <h4>學員ID：</h4>
+                                </div>
+                                <div class="col-sm-7 studentPointColumn">
+                                    <input class="st_inputName" id="SID" name="UID"
+                                           style=" text-align: center;">
+                                </div>
+                            </div><br>
                             <!-- 上肢 -->
                             <br /><br />
                             <div class="row">
@@ -117,7 +102,7 @@
                                     <h2>上肢</h2>
                                 </div>
                                 <div class="col-sm-7 studentPointColumn">
-                                    <input class="st_input" id="n1" name="Strength" />
+                                    <input class="st_inputName" id="n1" />
                                     <!--上肢值數 -->
                                 </div>
                             </div>
@@ -128,7 +113,7 @@
                                     <h2>核心</h2>
                                 </div>
                                 <div class="col-sm-7 studentPointColumn">
-                                    <input class="st_input" id="n2" name="Vitality" />
+                                    <input class="st_inputName" id="n2" />
                                     <!--核心值數 -->
                                 </div>
                             </div>
@@ -139,31 +124,19 @@
                                     <h2>下肢</h2>
                                 </div>
                                 <div class="col-sm-7 studentPointColumn">
-                                    <input class="st_input" id="n3" name="Agility" />
+                                    <input class="st_inputName" id="n3" />
                                     <!--下肢值數 -->
                                 </div>
                             </div>
                             <br /><br /><br />
-                            <!-- 懲罰天數 -->
                             <div class="row">
-                                <!-- <div class="col-sm-3 StudentContentFormat" style="display:inline;">
-                                    <h2>懲罰天數</h2>
-                                </div><br>
-                                <div class="col-sm-5 " style="display:inline;">
-                                    <input type="text" name="Penaltydays" style="text-align: center;width: 100%; " >
-                                </div><br><br> -->
                                 <div class="col-sm-12" style="display: inline">
                                     <div class="col-12" style="justify-content: center; text-align: center">
                                         <div>
-                                            <button type="button"
-                                                    id="select_determine"
-                                                    class="btn btn-primary btn-lg"
-                                                    data-toggle="modal"
-                                                    data-target="#exampleModalCenter"
-                                                    >
-                                                確定
+                                            @*data-bs-toggle="modal" data-bs-target="#submitwindow"*@
+                                            <button type="button" id="select_determine" class="btn btn-primary btn-lg">
+                                                送出
                                             </button>
-                                            <button class="btn btn-danger btn-lg" id="select_cancel">取消</button>
                                         </div>
                                     </div>
                                 </div>
@@ -196,13 +169,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <input type="button"
-                               name="Submit"
-                               value="註冊學員"
-                               class="btn btn-brown btn-primary"
-                               onclick="location.href='./newCoachRegistered.html'" />
-                        <button class="btn btn-brown btn-primary" type="button">帳號登出</button>
-                        <button class="btn btn-brown btn-primary" type="button">修改密碼</button>
+                        <a href="/Coach/Register" class="btn btn-brown btn-primary">註冊帳號</a>
+                        <a href="/Home/Logoff" class="btn btn-brown btn-primary">帳號登出</a>
+                        <a href="/Home/ForgotPassword" class="btn btn-brown btn-primary">修改密碼</a>
                     </div>
                     <br /><br />
                 </div>
@@ -212,6 +181,75 @@
             </div>
         </div>
     </div>
+
+    <!--確認送出資料 視窗 -->
+    <div class="modal fade"
+         id="submitwindow"
+         data-bs-backdrop="static"
+         data-bs-keyboard="false"
+         tabindex="-1"
+         aria-labelledby="submitwindowLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="text-align: center; width: 100px">
+                        <h5 class="modal-title" id="submitwindowLabel" style="display: inline-block">確認送出</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 0%"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-2 col-6 mx-auto" style="text-align:center">
+                        <div id="checkMsg" style="text-align:left">
+                            確認送出嗎?
+                            <hr>
+                            上肢： <br>
+                            核心： <br>
+                            下肢：
+                        </div>
+                    </div>
+                    <br /><br />
+                </div>
+                <div class="modal-footer">
+                    <form action="/Coach/Index" method="post">
+                        <input id="str" name="str" style="display:none" />
+                        <input id="vit" name="vit" style="display:none" />
+                        <input id="agi" name="agi" style="display:none" />
+                        <input id="uidpost" name="uid" style="display:none" />
+                        <button type="button" id="exit2" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                        <button type="submit" id="exit" class="btn btn-success" data-bs-dismiss="modal">確認</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("select_determine").addEventListener("click", function () {
+            var id = document.getElementById("uid").innerText;
+
+            document.getElementById("str").value = document.getElementById("n1").value;
+            document.getElementById("vit").value = document.getElementById("n2").value;
+            document.getElementById("agi").value = document.getElementById("n3").value;
+            document.getElementById("uidpost").value = id;
+
+            var str2 = document.getElementById("str").value;
+            var vit2 = document.getElementById("vit").value;
+            var agi2 = document.getElementById("agi").value;
+
+            console.log(id);
+
+            document.getElementById("checkMsg").innerHTML = `確認送出嗎?
+                                <hr>
+                                上肢：${str2} <br>
+                                核心：${vit2} <br>
+                                下肢：${agi2}`;
+        });
+
+        document.getElementById("SName").value = "";
+        document.getElementById("SID").value = "";
+    </script>
+
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script>
 
@@ -225,22 +263,27 @@
             });
 
         document.getElementById("select_determine").addEventListener("click", function (event) {
+
+            
             var str = document.getElementById("n1").value;
             var vit = document.getElementById("n2").value;
             var agi = document.getElementById("n3").value;
             var uid = document.getElementById("uid").innerText;
 
-            connection
-                .invoke("SendMessage", uid, str, vit, agi)
-                .then(function () {
-                    document.getElementById("n1").value = "";
-                    document.getElementById("n2").value = "";
-                    document.getElementById("n3").value = "";
-                })
-                .catch(function (err) {
-                    return console.error(err.toString());
-                });
-            event.preventDefault();
+            if (confirm(`確定送出嗎?\n 上肢:${str}\n 核心:${vit}\n 下肢:${agi}`)) {
+                connection
+                    .invoke("SendMessage", uid, str, vit, agi)
+                    .then(function () {
+                        document.getElementById("n1").value = "";
+                        document.getElementById("n2").value = "";
+                        document.getElementById("n3").value = "";
+                    })
+                    .catch(function (err) {
+                        return console.error(err.toString());
+                    });
+                event.preventDefault();
+            }
+                        
         });
     </script>
 </body>

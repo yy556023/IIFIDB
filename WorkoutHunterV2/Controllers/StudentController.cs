@@ -36,6 +36,7 @@ namespace WorkoutHunterV2.Controllers
                              select o).FirstOrDefault();
 
             string ItemStr = ViewModel.Items;
+            if (ItemStr == null) ItemStr = "{}";
             JObject Jitem = JsonConvert.DeserializeObject<JObject>(ItemStr);
             var queryItems = _context.Items.ToList();
             var querySkills = _context.Skills.ToList();
@@ -153,7 +154,7 @@ namespace WorkoutHunterV2.Controllers
                         select o).FirstOrDefault();
             if(query.PassWord == V.createHash(user.Password, Convert.FromBase64String(query.Salt)))
             {
-                msg = "新密碼與原密碼不得重複";
+                msg = "新密碼與原密碼重複";
                 TempData["errorMsg"] = msg;
                 return PasswordChange();
             }
@@ -259,14 +260,6 @@ namespace WorkoutHunterV2.Controllers
             return View(await query.FirstOrDefaultAsync());
         }
 
-        public IActionResult Shop()
-        {
-
-             List<Item> ViewModel = _context.Items.ToList();
-
-            return View(ViewModel);
-        }
-
         [HttpPost]
         public IActionResult SaveNowItem(string data)
         {
@@ -300,5 +293,59 @@ namespace WorkoutHunterV2.Controllers
             _context.SaveChanges();
             return Content($"裝備道具 {data}號藥水");
         }
+
+        public IActionResult Shop()
+        {
+
+            List<Item> ViewModel = _context.Items.ToList();
+
+            return View(ViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Shopping()
+        {
+            string UID = User.Claims.Single(p => p.Type == "ID").Value;
+            string str = "";
+
+            var b = await Request.BodyReader.ReadAsync();
+            str = Encoding.UTF8.GetString(b.Buffer);
+            int[] L = JsonConvert.DeserializeObject<int[]>(str);
+
+            // 查詢
+            var query = _context.CharacterItemSkills.Single(p => p.Uid == UID);
+            var queryItems = _context.Items.ToList();
+            // 背包物品
+            Dictionary<string, int> item = JsonConvert.DeserializeObject<Dictionary<string, int>>(query.Items);
+            // 總花費
+            int totalCostMoney = 0;
+            // 確認背包沒滿
+            if (item.Values.Sum() + L.Length > 30)
+                return Content("背包滿出來，交易失敗");
+            // 新增進背包
+            for (int i = 0; i < L.Length; i++)
+            {
+                foreach (var item2 in queryItems)
+                {
+                    if (item2.Iid == L[i])
+                        totalCostMoney += item2.CostMoney ?? 0;
+                }
+
+                if (item.ContainsKey(L[i].ToString()))
+                {
+                    item[L[i].ToString()] += 1;
+                }
+                else
+                {
+                    item.Add(L[i].ToString(), 1);
+                }
+            }
+            if (query.Money < totalCostMoney) return Content("交易失敗，金額不夠");
+            query.Money -= totalCostMoney;
+            query.Items = JsonConvert.SerializeObject(item);
+            _context.SaveChanges();
+
+            return Content("成功");
+        }
+
     }
 }

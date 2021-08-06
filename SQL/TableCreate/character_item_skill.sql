@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE [dbo].[character_item_skill](
 	[UID] [char](10) NOT NULL,
-	[Items] [nvarchar](50) NULL,
+	[Items] [nvarchar](100) NULL,
 	[Skills] [nvarchar](50) NULL,
 	[ChaPic] [nvarchar](10) NULL,
 	[Money] [int] NULL,
