@@ -31,7 +31,7 @@ if (@num >= @a) set @anser = 'S'
 else if (@num >= @b) set @anser = 'A'
 else if (@num >= @c) set @anser = 'B'
 else if (@num >= @d) set @anser = 'C'
-else set @anser = 'S'
+else set @anser = 'D'
 return @anser
 END;
 

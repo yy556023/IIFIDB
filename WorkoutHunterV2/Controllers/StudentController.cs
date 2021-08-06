@@ -36,6 +36,7 @@ namespace WorkoutHunterV2.Controllers
                              select o).FirstOrDefault();
 
             string ItemStr = ViewModel.Items;
+            if (ItemStr == null) ItemStr = "{}";
             JObject Jitem = JsonConvert.DeserializeObject<JObject>(ItemStr);
             var queryItems = _context.Items.ToList();
             var querySkills = _context.Skills.ToList();
@@ -153,7 +154,7 @@ namespace WorkoutHunterV2.Controllers
                         select o).FirstOrDefault();
             if(query.PassWord == V.createHash(user.Password, Convert.FromBase64String(query.Salt)))
             {
-                msg = "新密碼與原密碼不得重複";
+                msg = "新密碼與原密碼重複";
                 TempData["errorMsg"] = msg;
                 return PasswordChange();
             }

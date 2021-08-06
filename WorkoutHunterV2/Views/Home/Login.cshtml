@@ -1,4 +1,4 @@
-﻿@model string 
+﻿@model string
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,65 +8,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="~/home/CSS/bLogin.css">
-    <script src="~/home/JS/bLogin.js"></script>
+    <link rel="stylesheet" href="~/home/CSS/bLogin_v2.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 
 
 <body>
-    <div class="overlay">
-        <form action="/home/Login" method="post">
-            <div class="con">
+        <div class="container">
+            
+                
+
                 <header class="head-form">
                     <h2>Log In</h2>
                 </header>
 
-                <div class="field-set">
-                    <!--   user name -->
-                    <span class="input-item">
-                        <i class="fa fa-user-circle"></i>
-                    </span>
+                <form class="field-set" action="/home/Login" method="post">
 
-                    <!--   user name Input-->
-                    <input class="form-input" name="Email" id="txt-input" type="text" placeholder="請輸入帳號" required>
+                    <div class="myCss1 fa fa-user-circle input-item">
+                        <input class="LoginInput" name="Email" id="txt-input" type="text" placeholder="請輸入帳號" required>
+                    </div>
 
                     <br>
 
-                    <!--   Password -->
-                    <span class="input-item">
-                        <i class="fa fa-key"></i>
-                    </span>
-
-                    <!--   Password Input-->
-                    <input class="form-input" type="password" placeholder="請輸入密碼" id="pwd" name="Password" required>
+                    <div class="myCss1 fa fa-key input-item">
+                        <input class="LoginInput" type="password" placeholder="請輸入密碼" id="pwd" name="Password" required>
+                    </div>
 
 
                     <br>
-                    <!--        buttons -->
-                    <!--      button LogIn -->
-                    <button class="log-in">Log In</button>
-                </div>
-                <div style="width: 100%; text-align: center; font-size: 16px; color: red;">@Model</div>
-                <!--   other buttons -->
+                    <div class="MyCssHint">@Model</div>
+                    <button class="log-in myCss2 Bbutton">確認</button>
+                </form>
+
+
                 <div class="other">
-                    <!--      Forgot Password button-->
-                    <button class="btn submits frgt-pass"><a href="/home/ForgotPassword">忘記密碼</a></button>
-                    <!--     Sign Up button -->
-                    <button class="btn submits sign-up">
-                        <a href="/home/Register">註冊</a>
-                        <!--         Sign Up font icon -->
-                        <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <!--   End Conrainer  -->
-            </div>
 
-            <!-- End Form -->
-        </form>
-    </div>
+                    <button class="btn submits frgt-pass myCss3 Bbutton" onclick="location.href='/home/ForgotPassword'">
+                        忘記密碼
+                    </button>
+                    <button class="btn submits sign-up Bbutton" onclick="location.href='/home/Register'">
+                        註冊<div class="fa fa-user-plus" aria-hidden="true"></div>
+                    </button>
+
+                </div>
+         </div>
+        <!-- End Form -->
 </body>
 
 </html>
+

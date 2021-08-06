@@ -167,12 +167,13 @@ namespace WorkoutHunterV2.Controllers
                         select o).FirstOrDefault();
             if (user == null)
             {
-                return View("ForgotPassword", "無此信箱的使用者資料");
+                return Content("無此信箱或輸入錯誤");
             }
             // 若緩存還存在
             if (_cache.TryGetValue("UserLoginInfo", out myCache))
             {
-                return View("ForgotPassword", "認證信已寄出，不得重複寄出");
+                
+                return Content("認證信已寄出，5分鐘內不得重複寄出");
             }
             // 若此緩存不存在 > 寄出認證信
             else
@@ -193,10 +194,10 @@ namespace WorkoutHunterV2.Controllers
 
                 myCache.U = emailworker.UID;
                 myCache.K = emailworker.Key;
-                _cache.Set("UserLoginInfo", myCache, TimeSpan.FromSeconds(60));
-
+                _cache.Set("UserLoginInfo", myCache, TimeSpan.FromMinutes(5));
+                
                 emailworker.MailSend();
-                return View("ForgotPassword", "認證信已寄出");
+                return Content("認證信已寄出");
             }
         }
         public IActionResult CheckEmail(string Key)
