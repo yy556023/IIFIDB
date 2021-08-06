@@ -150,8 +150,8 @@ namespace WorkoutHunterV2.Models.Adventure
         {
             
             int[] T = new int[] {
-                Convert.ToInt32(VH.HP / VH.maxHP * 100),
-                Convert.ToInt32(VM.HP / VM.maxHP * 100),
+                Convert.ToInt32(((VH.maxHP != 0)? VH.HP / VH.maxHP : 0) * 100),
+                Convert.ToInt32(((VM.maxHP != 0)? VM.HP / VM.maxHP : 0) * 100),
                 VM.GetPic(),
                 VM.AtkTime,
                 VM.CPoint,

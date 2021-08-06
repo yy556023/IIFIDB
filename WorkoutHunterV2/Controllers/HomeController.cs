@@ -113,7 +113,7 @@ namespace WorkoutHunterV2.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(User newUser, string rePassword, string role)
+        public IActionResult Register(User newUser, string rePassword, string role, string Name)
         {
             if (!ModelState.IsValid)
             {
@@ -130,25 +130,61 @@ namespace WorkoutHunterV2.Controllers
                 TempData["errorMsg"] = "請選擇註冊的角色";
                 return View();
             }
-
+            if(Name == null)
+            {
+                TempData["errorMsg"] = "姓名不能為空";
+                return View();
+            }
             Verifier V = new Verifier();
 
             byte[] usersalt = V.createSalt();
-
+            string UID = V.UID();
             // 新增一筆資料的物件
             UserInfo sign = new UserInfo
             {
-                Uid = V.UID(),
+                Uid = UID,
                 Email = newUser.Email,
                 PassWord = V.createHash(newUser.Password, usersalt),
                 Role = role,
                 SignDate = DateTime.Now.ToString("yyyy/MM/dd"),
                 Class = "D",
-                Salt = Convert.ToBase64String(usersalt)
+                Salt = Convert.ToBase64String(usersalt),
+                Name = Name,
+                userPic = $"{V.UID()}.png"
             };
-
+            GameProgress signP = new GameProgress()
+            {
+                Uid = UID,
+                SavePoint = "[0,0,0,0,0]",
+                StartTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),
+            };
+            CharacterItemSkill signC = new CharacterItemSkill()
+            {
+                Uid = UID,
+                ChaPic = "Male.jpg",
+                Items = "{}",
+                Money = 0,
+                NowItem = 0,
+                NowSkill = 0,
+                RawPoint = 0,
+                Skills = "[]",
+            };
+            UserStatus signU = new UserStatus()
+            {
+                Uid = UID,
+                Agility = 0,
+                Strength = 0,
+                Vitality = 0,
+            };
             _context.Add(sign);
+            _context.Add(signP);
+            _context.Add(signC);
+            _context.Add(signU);
             _context.SaveChanges();
+
+
+
+
 
             return Redirect("Login");
         }
