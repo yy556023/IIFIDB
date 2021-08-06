@@ -6,7 +6,7 @@ namespace WorkoutHunterV2.Models.Home
     {
         public string UID { get; set; }
         [Required]
-        [RegularExpression("[a-zA-Z0-9_]*@.*")]
+        [RegularExpression("[a-zA-Z0-9_]*@gmail.com")]
         public string Email { get; set; }
         [Required]
         [RegularExpression("[a-zA-Z0-9_]*")]
