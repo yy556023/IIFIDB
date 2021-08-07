@@ -105,6 +105,47 @@
             z-index: 9;
 
         }
+
+
+        body, html {
+            height: 100%;
+            cursor: url(/student/dist/img/cursor/default.png), auto;
+        }
+
+        .Back {
+            background-image: url(/student/img/GameBack.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 55px;
+            width: 50px;
+            height: 30px;
+            margin: 0em 0px 0px 1em;
+            box-sizing: content-box;
+
+        }
+
+        .MyBtn:hover {
+            cursor: url(/student/dist/img/cursor/point.png), pointer;
+        }
+        .coin{
+            width: 50px;
+            height: 50px;
+            background-image: url("/Student/img/Coin2.png");
+                -webkit-animation: play 1s steps(7) infinite alternate;
+                        animation: play 1s steps(7) infinite alternate;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        @@-webkit-keyframes play {
+            from { background-position:    0px; }
+            to { background-position: -350px; }
+        }
+
+        @@keyframes play {
+            from { background-position:    0px; }
+            to { background-position: -350px; }
+        }
     </style>
 
 </head>
@@ -119,10 +160,11 @@
                         <div id="hp-bar" class="rpgui-progress red "></div>
                         @* 後端新增 id="ShowStage" *@
                         <p id="ShowStage" class="font_s">Stage:</p>
+                        <div class="row Back MyBtn" onclick="location.href='/Student/Index'"></div>
                     </div>
-                    <div class="col-lg-6 col-12">
+                    <div class="col-lg-6 col-12" style="z-index:-1">
                     </div>
-                    <div class="col-lg-6 col-12 nav_div">
+                    <div class="col-lg-6 col-12 nav_div" style="z-index:-1">
                         <img src="./image/DRG9.gif" alt="lost" class="img-fluid rounded mx-auto d-block monimg"
                              id="monImg">
                     </div>
@@ -162,11 +204,12 @@
                 <div class="modal-header justify-content-center">
                     <h5 class="modal-title" id="exampleModalLabel">Result</h5>
                 </div>
-                <div id="money" class="modal-body text-center">
-                    Coin:10
+                <div class="modal-body text-center" style=" justify-content: center; align-items: center; display: inline-flex;">
+                    <div class="coin" style="margin-right: 1em;"></div>
+                    <div id="money">Coin:10</div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn rpgui-button" onclick="reflash1()">OK</button>
+                    <button type="button" class="btn rpgui-button MyBtn" onclick="reflash1()">OK</button>
                 </div>
             </div>
         </div>
@@ -352,10 +395,19 @@
 
         if (x) {
             $("#monImg").fadeTo(3000, 0);
+            exampleModalLabel.innerText = "You Win";
+            exampleModalLabel.style.color = "yellow";
+        }
+        else {
+            exampleModalLabel.innerText = "You Dead";
+            exampleModalLabel.style.color = "red";
+            document.querySelector("#money").innerText = `Coin: 0`;
         }
         var modalElement = new bootstrap.Modal(document.getElementById('exampleModal'), {
             keyboard: false
         })
+        
+
         modalElement.show()
         window.clearInterval(Game)
     }

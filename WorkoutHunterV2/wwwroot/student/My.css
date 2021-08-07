@@ -5,12 +5,11 @@
 }
 
 .nav_div {
-    height: 85vh;
     border-image-width: 1.5vh;
     border-width: 1.5vh;
     box-sizing: border-box;
     border-image-repeat: repeat;
-    padding: 2vh;
+    padding: 0px 3vh 2vh 3vh;
     border-style: solid;
     border-image-source: url("/student/dist/img/border-image-golden.png");
     border-image-slice: 4 4 4 4;

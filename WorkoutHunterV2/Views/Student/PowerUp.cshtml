@@ -38,20 +38,41 @@
         }
 
         .side_div {
-            height: 12vh;
+            height: 5vh;
+        }
+
+        body, html {
+            height: 100%;
+            cursor: url(/student/dist/img/cursor/default.png), auto;
+        }
+
+        .Back {
+            background-image: url(/student/img/GameBack.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 50px;
+            height: 30px;
+            margin: 1em 0px 0px 0.5em;
+            box-sizing: content-box;
+        }
+
+        .MyBtn:hover {
+            cursor: url(/student/dist/img/cursor/point.png), pointer;
         }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
+        <div class="row Back MyBtn" onclick="location.href='/Student/Index'"></div>
         <div class="row justify-content-center">
             <div class="col-lg-8 col-10 side_div"></div>
             <div class="col-lg-8 col-10 nav_div">
                 <img src="/student/img/man-workout.png" class="rounded mx-auto d-block" alt="lost" />
             </div>
             <div class="col-lg-8 col-10 side_div">
-                <button type="button" class="btn btn-primary" onclick="modalBtn()">確認今日成長</button>
+                <button type="button" class="btn btn-primary MyBtn" onclick="modalBtn()">確認今日成長</button>
             </div>
         </div>
     </div>
@@ -69,7 +90,7 @@
                     下肢 +0
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-primary close" onclick="modalClose()">確認</button>
+                    <button type="button" class="btn btn-primary close MyBtn" onclick="modalClose()">確認</button>
                 </div>
             </div>
         </div>

@@ -89,8 +89,26 @@
             image-rendering: pixelated; /* CSS4 Proposed  */
             -ms-interpolation-mode: nearest-neighbor;
         }
+        .coin {
+            width: 50px;
+            height: 50px;
+            background-image: url(/student/img/Coin2.png);
+            -webkit-animation: play 1s steps(7) infinite alternate;
+            animation: play 1s steps(7) infinite alternate;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        @@-webkit-keyframes play {
+            from { background-position:    0px; }
+            to { background-position: -350px; }
+        }
 
-        
+        @@keyframes play {
+            from { background-position:    0px; }
+            to { background-position: -350px; }
+        }
+
     </style>
 </head>
 <body>
@@ -101,7 +119,7 @@
                 <div class="col-12 header_div">
                     <div class="row ">
                         <div class="col-lg-2 col-3 text-center">
-                            <img id="RankPicture" src="/student/img/rankIcon_S.png" alt="lost" class="img-fluid m-2">
+                            <img id="RankPicture" alt="lost" class="img-fluid m-2">
                         </div>
                         <div class="col-lg-6 col-9">
                             <div class="row m-3">
@@ -109,9 +127,11 @@
                                     <div>
                                         <h3>ID:@Model.Uid</h3>
                                     </div><br>
-                                    <div>
-                                        <h3>$:@Model.Money</h3>
-                                    </div>
+                                          <div style="display: flex;">
+                                              <div class="coin">
+                                              </div>
+                                              <h3 style="align-self: center;">@Model.Money</h3>
+                                          </div>
                                 </div>
                                 <div class="col-4 border_style rpgFont_style ">
                                     <h5>STR:@Model.Strength</h5>
@@ -181,7 +201,7 @@
                         <div class="col-md-1 col-12">
                         </div>
                         <div class="col-md-3 col-12 text-center">
-                            <button type="button" onclick="location.href='/Adventure/Index'" class="btn rpgui-button rpgFont_style m-1" id="AdvBtn">
+                            <button type="button" onclick="location.href='/Adventure/Index'" class="btn rpgui-button rpgFont_style m-1 Btn" id="AdvBtn">
                                 <h3 class="fw-bolder">Adventure!!</h3>
                             </button>
                         </div>

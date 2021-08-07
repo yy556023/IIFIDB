@@ -12,8 +12,66 @@
         <link href="~/student/dist/rpgui.min.css" rel="stylesheet" type="text/css">
         <link href="~/student/My.css" rel="stylesheet" type="text/css">
         <style>
-            body, html{
+            body {
+                background-image: url(/student/img/indexBG.gif);
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-attachment: fixed;
+                -o-background-size: 100% 100%, auto;
+                -moz-background-size: 100% 100%, auto;
+                -webkit-background-size: 100% 100%, auto;
+                background-size: 100% 100%, auto;
+            }
+
+            body, html {
                 height: 100%;
+            }
+
+            .Back {
+                background-image: url(/student/img/GameBack.png);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 50px;
+                height: 30px;
+            }
+
+            .MyBtn:hover {
+                cursor: url(/student/dist/img/cursor/point.png), pointer;
+            }
+
+            @@media(max-width:768px) {
+                .npc {
+                    display: none;
+                }
+
+                .npc2 {
+                    display: none;
+                }
+            }
+
+            .npc {
+                background-image: url(/student/img/npc.png);
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 9em;
+                height: 13em;
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+            }
+
+            .npc2 {
+                background-image: url(/student/img/npc2.png);
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 9em;
+                height: 13em;
+                position: absolute;
+                right: 0px;
+                bottom: 0px;
             }
         </style>
     </head>
@@ -22,7 +80,8 @@
 
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-lg-8 col-10 nav_div m-4 w-75">
+                <div class="col-lg-8 col-10 nav_div m-4 w-75" style="padding-top:0px">
+                    <div class="row Back MyBtn" onclick="location.href='/Student/Index'"></div>
                     <div class="row">
                         <div class="col-12 commodity_div topnav_box">
                             <div class="row row-cols-1 row-cols-md-5 g-4">
@@ -46,7 +105,7 @@
                                 <!-- copy end here for one -->
                             </div>
                         </div>
-                        <div class="row text-end">
+                        <div class="row text-end" style="padding-top:0.5em">
                             <div class="col-6 align-self-center text-center money" id="TotalMoney">$0</div>
                             <div class="col-6">
                                 <button type="button" class="btn rpgui-button rpgFont" onclick="modalBtn()">OK</button>
@@ -58,6 +117,9 @@
                 </div>
             </div>
         </div>
+        <div class="npc"></div>
+        <div class="npc2"></div>
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -109,7 +171,7 @@
                     item.onclick = function () {
                         CancelBuyItem(this, modalElement);
                     }
-                    
+
                 })
             }
 
