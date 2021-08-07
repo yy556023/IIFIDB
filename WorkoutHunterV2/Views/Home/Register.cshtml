@@ -59,6 +59,40 @@
     <script src="~/home/JS/MyJS.js" ></script>
     <script>
         CreateTitle();
+
+        function auto(btn, name, mail, ps, reps) {
+            var x1 = document.querySelector(".identity");
+            var x2 = document.querySelectorAll(".MyCssInputBox");
+            if (btn == 1) {
+                x1.firstElementChild.checked = true;
+            }
+            else {
+                x1.lastElementChild.previousSibling.checked = true;
+            }
+            x2[0].value = name;
+            x2[1].value = mail;
+            x2[2].value = ps;
+            x2[3].value = reps;
+
+        }
+        document.onkeydown = function (e) {
+            if (e.key == "q") {
+                var name = "Banana";
+                var mail = "Banana@yhaoo.com.tw"
+                var ps = "12345678";
+                var reps = "12345678"
+                auto(1, name, mail, ps, reps);
+            }
+            if (e.key == "w") {
+                var name = "Banana";
+                var mail = "Banana@gamil.com"
+                var ps = "12345678";
+                var reps = "12345678"
+                auto(1, name, mail, ps, reps);
+            }
+        }
+
+        
     </script>
 </body>
 

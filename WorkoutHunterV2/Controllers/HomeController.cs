@@ -206,55 +206,60 @@ namespace WorkoutHunterV2.Controllers
                 return Content("無此信箱或輸入錯誤");
             }
             // 若緩存還存在
-            if (_cache.TryGetValue("UserLoginInfo", out myCache))
+            string CacheStr = "UserLoginInfo";
+            int i = 1;
+            while (_cache.TryGetValue($"{CacheStr}{i}", out myCache))
             {
-                
-                return Content("認證信已寄出，5分鐘內不得重複寄出");
+                if (myCache.U == user.Uid)
+                    return Content("認證信已寄出，無法重複寄出");
+                else
+                    i++;
             }
+
             // 若此緩存不存在 > 寄出認證信
-            else
+            myCache = new MyCache();
+            EmailWorker emailworker = new EmailWorker()
             {
-                myCache = new MyCache();
-                EmailWorker emailworker = new EmailWorker()
-                {
-                    addressee = "ub1213go@gmail.com",
-                    sendEmail = "ub1213gogo@gmail.com",
-                    sendPassword = "Online12",
-                    subject = "會員註冊認證信",
-                    UID = user.Uid,
-                };
+                addressee = "ub1213go@gmail.com",
+                sendEmail = "ub1213gogo@gmail.com",
+                sendPassword = "Online12",
+                subject = "會員註冊認證信",
+                UID = user.Uid,
+            };
 
-                string str = emailworker.RondomSTR().Replace("+", "%2B");
-                //# 會員註冊認證信
-                //                信箱ID，您好:
-                //                為了驗證您的身分，請於5分鐘內點擊下列網址，並修改密碼。
-                //XXX
-                //感謝您的配合 !
+            string str = emailworker.RondomSTR().Replace("+", "%2B");
+            //# 會員註冊認證信
+            //                信箱ID，您好:
+            //                為了驗證您的身分，請於5分鐘內點擊下列網址，並修改密碼。
+            //XXX
+            //感謝您的配合 !
 
-                emailworker.content = $"<h1>會員註冊認證信</h1><br><h3>親愛的{Email}會員您好:</h3><br>" +
-                    $"<div style='font-size:16px;color:black'>為了驗證您的身分，請盡速點擊下列網址，並修改密碼<br></div>  " +
-                    $"<a href='https://localhost:44370/home/CheckEmail?Key=" + str + "'>https://localhost:44370/home/CheckEmail?Key=" + str + "</a><br><br>" +
-                    "<div>在此感謝您的配合！</div>";
+            emailworker.content = $"<h1>會員註冊認證信</h1><br><h3>親愛的{Email}會員您好:</h3><br>" +
+                $"<div style='font-size:16px;color:black'>為了驗證您的身分，請盡速點擊下列網址，並修改密碼<br></div>  " +
+                $"<a href='https://localhost:44370/home/CheckEmail?Key=" + str + "'>https://localhost:44370/home/CheckEmail?Key=" + str + "</a><br><br>" +
+                "<div>在此感謝您的配合！</div>";
 
-                myCache.U = emailworker.UID;
-                myCache.K = emailworker.Key;
-                _cache.Set("UserLoginInfo", myCache, TimeSpan.FromMinutes(5));
+            myCache.U = emailworker.UID;
+            myCache.K = emailworker.Key;
+            _cache.Set($"{CacheStr}{i}", myCache, TimeSpan.FromMinutes(5));
                 
-                emailworker.MailSend();
-                return Content("認證信已寄出");
-            }
+            emailworker.MailSend();
+            return Content("認證信已寄出");
         }
         public IActionResult CheckEmail(string Key)
         {
             MyCache cache;
-            if (_cache.TryGetValue("UserLoginInfo", out cache))
+            string CacheStr = "UserLoginInfo";
+            int i = 1;
+            while (_cache.TryGetValue($"{CacheStr}{i}", out cache))
             {
                 if (Convert.ToBase64String(cache.K) == Key)
                 {
+                    TempData["userKey"] = Key;
                     // 認證許可，修改密碼頁面
                     return View();
                 }
-
+                i++;
             }
             // 認證過期頁面
             return View("ForgotPassword", "認證頁面已過期");
@@ -267,22 +272,30 @@ namespace WorkoutHunterV2.Controllers
             {
                 return View("CheckEmail", "密碼格式錯誤");
             }
-            if(_cache.TryGetValue("UserLoginInfo", out cache))
+            string CacheStr = "UserLoginInfo";
+            int i = 1;
+            while(_cache.TryGetValue($"{CacheStr}{i}", out cache))
             {
-                Verifier V = new Verifier();
-                UserPasswordEdit.UID = cache.U;
-                var query = (from o in _context.UserInfos
-                            where o.Uid == UserPasswordEdit.UID
-                            select o).FirstOrDefault();
-                byte[] salt = V.createSalt();
-                string password = V.createHash(UserPasswordEdit.Password, salt);
+                if(Convert.ToBase64String(cache.K) == UserPasswordEdit.Key)
+                {
+                    Verifier V = new Verifier();
+                    UserPasswordEdit.UID = cache.U;
+                    var query = (from o in _context.UserInfos
+                                where o.Uid == UserPasswordEdit.UID
+                                select o).FirstOrDefault();
+                    byte[] salt = V.createSalt();
+                    string password = V.createHash(UserPasswordEdit.Password, salt);
 
-                query.Salt = Convert.ToBase64String(salt);
-                query.PassWord = password;
-                _context.SaveChanges();
-                _cache.Remove("UserLoginInfo");
+                    query.Salt = Convert.ToBase64String(salt);
+                    query.PassWord = password;
+                    _context.SaveChanges();
+                    _cache.Remove($"{CacheStr}{i}");
+                    return Redirect("Login");
+                }
+                else
+                    i++;
             }
-            return Redirect("Login");
+            return View("ForgotPassword", "伺服器異常");
         }
         public async Task<IActionResult> Logoff()
         {
