@@ -44,7 +44,7 @@ namespace WorkoutHunterV2.Controllers
         {
             // 格式不正確返回錯誤
             if (!ModelState.IsValid)
-                return View("Login", "格式錯誤，請輸入正確格式");
+                return View("Login", "帳號或密碼格式錯誤，請重新輸入");
 
             // 宣告變數
             Verifier V = new Verifier();
@@ -100,11 +100,11 @@ namespace WorkoutHunterV2.Controllers
                 }
                 // 密碼錯誤
                 else
-                    return View("Login", "帳號或密碼錯誤");
+                    return View("Login", "帳號或密碼錯誤，請重新輸入");
             }
             // 帳號不存在
             else
-                return View("Login", "帳號或密碼錯誤");
+                return View("Login", "帳號或密碼錯誤，請重新輸入");
 
         }
 
@@ -220,13 +220,21 @@ namespace WorkoutHunterV2.Controllers
                     addressee = "ub1213go@gmail.com",
                     sendEmail = "ub1213gogo@gmail.com",
                     sendPassword = "Online12",
-                    subject = "註冊認證",
+                    subject = "會員註冊認證信",
                     UID = user.Uid,
                 };
 
                 string str = emailworker.RondomSTR().Replace("+", "%2B");
-                emailworker.content = " <a href='https://localhost:44370/home/CheckEmail?Key=" + str + "'>認證點我</a> ";
+                //# 會員註冊認證信
+                //                信箱ID，您好:
+                //                為了驗證您的身分，請於5分鐘內點擊下列網址，並修改密碼。
+                //XXX
+                //感謝您的配合 !
 
+                emailworker.content = $"<h1>會員註冊認證信</h1><br><h3>親愛的{Email}會員您好:</h3><br>" +
+                    $"<div style='font-size:16px;color:black'>為了驗證您的身分，請盡速點擊下列網址，並修改密碼<br></div>  " +
+                    $"<a href='https://localhost:44370/home/CheckEmail?Key=" + str + "'>https://localhost:44370/home/CheckEmail?Key=" + str + "</a><br><br>" +
+                    "<div>在此感謝您的配合！</div>";
 
                 myCache.U = emailworker.UID;
                 myCache.K = emailworker.Key;
