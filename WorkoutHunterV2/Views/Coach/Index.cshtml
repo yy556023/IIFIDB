@@ -133,8 +133,8 @@
                                 <div class="col-sm-12" style="display: inline">
                                     <div class="col-12" style="justify-content: center; text-align: center">
                                         <div>
-                                            @*data-bs-toggle="modal" data-bs-target="#submitwindow"*@
-                                            <button type="button" id="select_determine" class="btn btn-primary btn-lg">
+
+                                            <button type="button" id="select_determine" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#submitwindow">
                                                 送出
                                             </button>
                                         </div>
@@ -144,8 +144,6 @@
                         </form>
                     </div>
                 </div>
-
-                <script src="~/coach/count.js"></script>
                 <script src="~/coach/Coach.js"></script>
             </div>
         </div>
@@ -211,12 +209,12 @@
                     <br /><br />
                 </div>
                 <div class="modal-footer">
-                    <form action="/Coach/Index" method="post">
+                    <form action="/Coach/Index" method="post" id="InPut">
                         <input id="str" name="str" style="display:none" />
                         <input id="vit" name="vit" style="display:none" />
                         <input id="agi" name="agi" style="display:none" />
                         <input id="uidpost" name="uid" style="display:none" />
-                        <button type="button" id="exit2" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                        <button type="button" id="exit" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
                         <button type="submit" id="exit" class="btn btn-success" data-bs-dismiss="modal">確認</button>
                     </form>
                 </div>
@@ -227,6 +225,7 @@
     <script>
         document.getElementById("select_determine").addEventListener("click", function () {
             var id = document.getElementById("uid").innerText;
+            var name = document.getElementById("SName").value;
 
             document.getElementById("str").value = document.getElementById("n1").value;
             document.getElementById("vit").value = document.getElementById("n2").value;
@@ -237,13 +236,18 @@
             var vit2 = document.getElementById("vit").value;
             var agi2 = document.getElementById("agi").value;
 
+
             console.log(id);
 
-            document.getElementById("checkMsg").innerHTML = `確認送出嗎?
-                                <hr>
-                                上肢：${str2} <br>
-                                核心：${vit2} <br>
-                                下肢：${agi2}`;
+            document.getElementById("checkMsg").innerHTML =
+                `確認送出成長點數嗎？
+                            <hr>
+                            學員姓名：【${name}】
+                            <hr>
+                            學員ID：【${id}】
+                            <hr>
+                            上肢：【${str2}】 || 核心：【${vit2}】 || 下肢：【${agi2}】
+                            <hr>`;
         });
 
         document.getElementById("SName").value = "";
@@ -253,37 +257,34 @@
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script>
 
-        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        var FormPut = document.getElementById("InPut");
 
+        FormPut.addEventListener("submit", function () {
+            alert("學員成長點數已送出");
 
-        connection
-            .start()
-            .catch(function (err) {
-                return console.error(err.toString());
-            });
+            var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-        document.getElementById("select_determine").addEventListener("click", function (event) {
+            var str = document.getElementById("str").value;
+            var vit = document.getElementById("vit").value;
+            var agi = document.getElementById("agi").value;
+            var uid = document.getElementById("uidpost").value;
 
-            
-            var str = document.getElementById("n1").value;
-            var vit = document.getElementById("n2").value;
-            var agi = document.getElementById("n3").value;
-            var uid = document.getElementById("uid").innerText;
+            connection
+                .start()
+                .catch(function (err) {
+                    return console.error(err.toString());
+                });
 
-            if (confirm(`確定送出嗎?\n 上肢:${str}\n 核心:${vit}\n 下肢:${agi}`)) {
-                connection
-                    .invoke("SendMessage", uid, str, vit, agi)
-                    .then(function () {
-                        document.getElementById("n1").value = "";
-                        document.getElementById("n2").value = "";
-                        document.getElementById("n3").value = "";
-                    })
-                    .catch(function (err) {
-                        return console.error(err.toString());
-                    });
-                event.preventDefault();
-            }
-                        
+            connection
+                .invoke("SendMessage", uid, str, vit, agi)
+                .then(function () {
+                    document.getElementById("n1").value = "";
+                    document.getElementById("n2").value = "";
+                    document.getElementById("n3").value = "";
+                })
+                .catch(function (err) {
+                    return console.error(err.toString());
+                });
         });
     </script>
 </body>

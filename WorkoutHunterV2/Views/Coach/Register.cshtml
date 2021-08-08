@@ -55,13 +55,12 @@
 
                                 @foreach (var item in Model)
                                 {
-                                    <li class="student">
-                                        <button class="tablinks" onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
-                                            @item.Uid <br>
-                                            @item.Name
-                                        </button>
-                                    </li>
-                                }
+                    <li class="student">
+                        <button class="tablinks" onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
+                            @item.Uid <br>
+                            @item.Name
+                        </button>
+                    </li>}
                             </ul>
                         </div>
                         <!-- 設定(齒輪) -->
@@ -106,7 +105,7 @@
                                     <h2>上肢</h2>
                                 </div>
                                 <div class="col-sm-8">
-                                    <input class="st_inputName" id="n1" 
+                                    <input class="st_inputName" id="n1"
                                            style=" text-align: center;">
 
                                 </div>
@@ -118,7 +117,7 @@
                                     <h2>核心</h2>
                                 </div>
                                 <div class="col-sm-8">
-                                    <input class="st_inputName" id="n2" 
+                                    <input class="st_inputName" id="n2"
                                            style=" text-align: center;">
 
                                 </div>
@@ -129,7 +128,7 @@
                                     <h2>下肢</h2>
                                 </div>
                                 <div class="col-sm-8">
-                                    <input class="st_inputName" id="n3" 
+                                    <input class="st_inputName" id="n3"
                                            style=" text-align: center;">
 
                                 </div>
@@ -152,7 +151,6 @@
                     </div>
                 </div>
 
-                <script src="~/coach/count.js"></script>
                 <script src="~/coach/CoachRegistered.js"></script>
             </div>
         </div>
@@ -217,13 +215,13 @@
                     <br /><br />
                 </div>
                 <div class="modal-footer">
-                    <form action="/Coach/Register" method="post">
+                    <form action="/Coach/Register" method="post" id="RePut">
                         <input id="str" name="str" style="display:none" />
                         <input id="vit" name="vit" style="display:none" />
                         <input id="agi" name="agi" style="display:none" />
                         <input id="uid" name="uid" style="display:none" />
                         <input id="cid" name="cid" style="display:none" />
-                        <button type="button" id="exit2" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                        <button type="button" id="exit" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
                         <button type="submit" id="exit" class="btn btn-success" data-bs-dismiss="modal">確認</button>
                     </form>
                 </div>
@@ -232,10 +230,22 @@
     </div>
 
     <script>
+
+        var FormPut = document.getElementById("RePut");
+
+        FormPut.addEventListener("submit", function () {
+            alert("學員關係已註冊完畢");
+        });
+
+
         document.getElementById("select_determine").addEventListener("click", function () {
             var name = document.getElementById("SName").value;
             var id = document.getElementById("SID").value;
             var coach = document.getElementById("coachid").innerText.toString().substring(4);
+
+            var str = document.getElementById("n1").value;
+            var vit = document.getElementById("n2").value;
+            var agi = document.getElementById("n3").value;
 
             document.getElementById("str").value = document.getElementById("n1").value;
             document.getElementById("vit").value = document.getElementById("n2").value;
@@ -243,11 +253,20 @@
             document.getElementById("uid").value = id;
             document.getElementById("cid").value = coach;
 
-            console.log(coach);
+            console.log(name);
+            console.log(id);
 
-            document.getElementById("checkMsg").innerHTML = `確認登錄學員關係嗎?<hr>學員姓名：${name} <br><br>
-                    學員ID：${id} <br><br>
-                        教練ID：${coach}`
+            document.getElementById("checkMsg").innerHTML =
+                `確認登錄學員關係嗎？
+                <hr>
+                學員姓名：【${name}】
+                <hr>
+                學員ID：【${id}】
+                <hr>
+                上肢：【${str}】 || 核心：【${vit}】 || 下肢：【${agi}】
+                <hr>
+                教練ID：【${coach}】
+                <hr>`
         });
 
     </script>

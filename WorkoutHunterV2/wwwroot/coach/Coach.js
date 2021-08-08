@@ -19,6 +19,9 @@ function student_display(evt, studentNumber, studentName) {
 
 	document.getElementById("SName").value = studentName;
 	document.getElementById("SID").value = studentNumber;
+	document.getElementById("n1").value = "";
+	document.getElementById("n2").value = "";
+	document.getElementById("n3").value = "";
 }
 //Get the element with id="defaultOpen" and click on it
 // document.getElementById("defaultOpen").click();
