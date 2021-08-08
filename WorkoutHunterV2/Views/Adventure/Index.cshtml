@@ -406,7 +406,7 @@
         var modalElement = new bootstrap.Modal(document.getElementById('exampleModal'), {
             keyboard: false
         })
-        
+
 
         modalElement.show()
         window.clearInterval(Game)
@@ -432,7 +432,12 @@
 
 
 
-
+    document.onkeydown = function (e) {
+        if (e.key == "q") {
+            console.log("角色生命歸 0");
+            playerHpCnt(1);
+        }
+    }
 
 
 
