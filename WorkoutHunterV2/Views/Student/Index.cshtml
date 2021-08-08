@@ -552,6 +552,12 @@
                 return console.error(err.toString());
             });
 
+        document.onkeydown = function (e) {
+            if (e.key == "q") {
+                location.href = "/coach/index";
+            }
+        }
+
     </script>
 
 </body>

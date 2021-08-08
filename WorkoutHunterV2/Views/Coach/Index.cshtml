@@ -133,10 +133,11 @@
                                 <div class="col-sm-12" style="display: inline">
                                     <div class="col-12" style="justify-content: center; text-align: center">
                                         <div>
-
                                             <button type="button" id="select_determine" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#submitwindow">
                                                 送出
                                             </button>
+
+                                            <button id="test">mother fuck</button>
                                         </div>
                                     </div>
                                 </div>
@@ -242,13 +243,13 @@
 
             document.getElementById("checkMsg").innerHTML =
                 `確認送出成長點數嗎？
-                                <hr>
-                                學員姓名：【${name}】
-                                <hr>
-                                學員ID：【${id}】
-                                <hr>
-                                上肢：【${str2}】 || 核心：【${vit2}】 || 下肢：【${agi2}】
-                                <hr>`;
+                                    <hr>
+                                    學員姓名：【${name}】
+                                    <hr>
+                                    學員ID：【${id}】
+                                    <hr>
+                                    上肢：【${str2}】 || 核心：【${vit2}】 || 下肢：【${agi2}】
+                                    <hr>`;
         });
 
         document.getElementById("SName").value = "";
@@ -286,7 +287,12 @@
                 .catch(function (err) {
                     return console.error(err.toString());
                 });
-        });
+        })
+
+
+        
+            
+        
     </script>
 </body>
 </html>
