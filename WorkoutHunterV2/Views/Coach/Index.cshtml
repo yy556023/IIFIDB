@@ -136,8 +136,6 @@
                                             <button type="button" id="select_determine" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#submitwindow">
                                                 送出
                                             </button>
-
-                                            <button id="test">mother fuck</button>
                                         </div>
                                     </div>
                                 </div>
@@ -258,24 +256,23 @@
 
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        connection
+            .start()
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
 
         var FormPut = document.getElementById("InPut");
 
         FormPut.addEventListener("submit", function () {
             alert("學員成長點數已送出");
 
-            var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
-
             var str = document.getElementById("str").value;
             var vit = document.getElementById("vit").value;
             var agi = document.getElementById("agi").value;
             var uid = document.getElementById("uidpost").value;
-
-            connection
-                .start()
-                .catch(function (err) {
-                    return console.error(err.toString());
-                });
 
             connection
                 .invoke("SendMessage", uid, str, vit, agi)
@@ -287,11 +284,7 @@
                 .catch(function (err) {
                     return console.error(err.toString());
                 });
-        })
-
-
-        
-            
+        });
         
     </script>
 </body>

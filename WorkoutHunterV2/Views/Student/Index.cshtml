@@ -172,13 +172,13 @@
                                     </div>
                                 </div>
                                 <div class="col-4 border_style rpgFont_style ">
-                                    <h5>STR:@Model.Strength</h5>
+                                    <h5 class="MyS">STR:@Model.Strength</h5>
                                 </div>
                                 <div class="col-4 border_style rpgFont_style ">
-                                    <h5>VIT:@Model.Vitality</h5>
+                                    <h5 class="MyS">VIT:@Model.Vitality</h5>
                                 </div>
                                 <div class="col-4 border_style rpgFont_style ">
-                                    <h5>AGI:@Model.Agility</h5>
+                                    <h5 class="MyS">AGI:@Model.Agility</h5>
                                 </div>
                             </div>
                         </div>
@@ -534,8 +534,8 @@
         }
         function modalClose() {
             modalElement.hide();
+            document.getElementById('openWorkout').style.display = 'none';
         }
-
         connection.on("@Model.Uid", function (str, vit, agi) {
             document.getElementById("reMsg").innerHTML = `STR +${str} <br />
                         VIT +${vit} <br />
@@ -544,6 +544,11 @@
                 modalBtn();
             }
             console.log("HI");
+            var x = document.querySelectorAll(".MyS");
+
+            x[0].innerText = `${x[0].innerText.substring(0, 4)}${parseInt(document.querySelectorAll(".MyS")[0].innerText.substring(4)) + parseInt(str)}`
+            x[1].innerText = `${x[1].innerText.substring(0, 4)}${parseInt(document.querySelectorAll(".MyS")[1].innerText.substring(4)) + parseInt(vit)}`
+            x[2].innerText = `${x[2].innerText.substring(0, 4)}${parseInt(document.querySelectorAll(".MyS")[2].innerText.substring(4)) + parseInt(agi)}`
         });
 
         connection
