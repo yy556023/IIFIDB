@@ -251,14 +251,14 @@ namespace WorkoutHunterV2.Controllers
             }
         }
 
-        public async Task<IActionResult> PowerUp()
-        {
-            string UID = User.Claims.Where(p => p.Type == "ID").FirstOrDefault().Value;
+        //public async Task<IActionResult> PowerUp()
+        //{
+        //    string UID = User.Claims.Where(p => p.Type == "ID").FirstOrDefault().Value;
 
-            var query = _context.UserInfos.Where(o => o.Uid == UID);
+        //    var query = _context.UserInfos.Where(o => o.Uid == UID);
 
-            return View(await query.FirstOrDefaultAsync());
-        }
+        //    return View(await query.FirstOrDefaultAsync());
+        //}
 
         [HttpPost]
         public IActionResult SaveNowItem(string data)

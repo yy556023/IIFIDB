@@ -12,6 +12,7 @@
     <link href="~/student/js/bootstrap.min.js" rel="stylesheet">
     <link href="~/student/dist/rpgui.min.css" rel="stylesheet" type="text/css">
     <link href="~/student/main.css" rel="stylesheet">
+    <script src="~/student/dist/rpgui.min.js"></script>
 
 
     <style type="text/css">
@@ -25,9 +26,11 @@
             -webkit-background-size: 100% 100%, auto;
             background-size: 100% 100%, auto;
         }
-        html,body{
-            height :100%;
+
+        html, body {
+            height: 100%;
         }
+
         .header_div {
             height: 22vh;
         }
@@ -71,7 +74,6 @@
 
         .rpgFont_style {
             color: white;
-            text-shadow: 1px black;
             font-style: normal;
             line-height: 1vh;
             text-shadow: 0.2em 0.2em 0.2em black
@@ -83,12 +85,30 @@
             margin-top: 25vh;
         }
 
+        /* 8/7 新增 確認完請刪除註解*/
+        .pop_workout {
+            padding: 0;
+            margin: 0;
+            width: 80%;
+            height: 70%;
+            right: 10%;
+            top: 15%;
+            position: fixed;
+            overflow: hidden;
+            background-image: url(/student/img/BG3.png);
+            background-blend-mode: screen;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
         #slot_1, #slot_2, #AdvBtn {
             image-rendering: optimize-contrast; /* CSS3 Proposed  */
             image-rendering: crisp-edges; /* CSS4 Proposed  */
             image-rendering: pixelated; /* CSS4 Proposed  */
             -ms-interpolation-mode: nearest-neighbor;
         }
+
         .coin {
             width: 50px;
             height: 50px;
@@ -99,16 +119,34 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
         @@-webkit-keyframes play {
-            from { background-position:    0px; }
-            to { background-position: -350px; }
+            from {
+                background-position: 0px;
+            }
+
+            to {
+                background-position: -350px;
+            }
         }
 
         @@keyframes play {
-            from { background-position:    0px; }
-            to { background-position: -350px; }
-        }
+            from {
+                background-position: 0px;
+            }
 
+            to {
+                background-position: -350px;
+            }
+        }
+        .Back {
+            background-image: url(/student/img/GameBack.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 50px;
+            height: 30px;
+        }
     </style>
 </head>
 <body>
@@ -127,11 +165,11 @@
                                     <div>
                                         <h3>ID:@Model.Uid</h3>
                                     </div><br>
-                                          <div style="display: flex;">
-                                              <div class="coin">
-                                              </div>
-                                              <h3 style="align-self: center;">@Model.Money</h3>
-                                          </div>
+                                    <div style="display: flex;">
+                                        <div class="coin">
+                                        </div>
+                                        <h3 style="align-self: center;">@Model.Money</h3>
+                                    </div>
                                 </div>
                                 <div class="col-4 border_style rpgFont_style ">
                                     <h5>STR:@Model.Strength</h5>
@@ -178,7 +216,11 @@
                                 </div>
                                 <div class="col-3 ">
                                     <div class="logo_div">
-                                        <img src="/student/img/workout.png" onclick="location.href='/Student/PowerUp'" alt="" class="img-fluid p-2 Btn">
+                                        <a href="javascript:void(0)"
+                                           onclick="document.getElementById('openWorkout').style.display='block';"
+                                           class="btn Btn">
+                                            <img src="/student/img/workout.png" alt="" class="img-fluid p-2">
+                                        </a>
                                     </div>
                                     <div class="logo_div">
                                         <img src="/student/img/skillBook.png" onclick="location.href='/Student/SkillTree'" alt="" class="img-fluid p-2 Btn">
@@ -215,7 +257,7 @@
         <div class="rpgui-container framed rpgui-draggable" id="inventory">
             <div>
                 <a href="javascript:void(0)" onclick="document.getElementById('openBag').style.display='none';">
-                    X Close
+                    Close X
                 </a>
             </div>
 
@@ -299,9 +341,59 @@
     }
     <div id="SQLrank" style="display:none">@Model.Class</div>
 
+    <!-- workout modal  8/7新增-->
+    <div id="openWorkout" style="display:none;">
+        <div class="border_style pop_workout" id="inventory">
+            <div>
+                <div class="Btn Back" onclick="document.getElementById('openWorkout').style.display='none'">
+                </div>
+                <img src="/student/img/run.gif" alt="" class="img-fluid position-absolute top-50 start-50 translate-middle">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 8/7新增-->
+    <!--<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border_style bg-dark">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title rpgFont_style" id="exampleModalLabel">Training result</h5>
+                </div>
+                <div class="modal-body text-center lh-lg rpgFont_style">
+                    STR+5 <br> VIT+2 <br> AGI+2
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn rpgui-button rpgFont_style">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="exampleModalLabel">訓練結果</h5>
+                </div>
+                <div class="modal-body text-center" id="reMsg">
+                    STR +0 <br />
+                    VIT +0 <br />
+                    AGI +0
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary close MyBtn" onclick="modalClose()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="/student/js/popper.min.js"></script>
     <script src="/student/js/bootstrap.min.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+
     <script>
+
         var RankStage = ["S", "A", "B", "C", "D"];
         var StrRankPicture = "rankIcon_D.png";
         for (let i = 0; i < RankStage.length; i++) {
@@ -429,6 +521,36 @@
                 }
             }
         })
+
+        // 訓練視窗 8/7更新
+        var modalElement = new bootstrap.Modal(document.getElementById("exampleModal"), {
+            backdrop: 'static',
+            keyboard: false,
+        });
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        function modalBtn() {
+            modalElement.show();
+        }
+        function modalClose() {
+            modalElement.hide();
+        }
+
+        connection.on("@Model.Uid", function (str, vit, agi) {
+            document.getElementById("reMsg").innerHTML = `STR +${str} <br />
+                        VIT +${vit} <br />
+                        AGI +${agi}`;
+            if (openWorkout.style.display == "block") {
+                modalBtn();
+            }
+            console.log("HI");
+        });
+
+        connection
+            .start()
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
 
     </script>
 
