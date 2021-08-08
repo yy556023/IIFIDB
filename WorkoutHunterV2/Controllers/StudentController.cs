@@ -358,7 +358,7 @@ namespace WorkoutHunterV2.Controllers
             var queryItems = _context.Items.ToList();
             // 背包物品
             Dictionary<string, int> item;
-            if (query == null)
+            if (query.Items != null)
             {
                 item = JsonConvert.DeserializeObject<Dictionary<string, int>>(query.Items);
             }
