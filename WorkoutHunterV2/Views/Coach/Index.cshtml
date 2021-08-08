@@ -144,7 +144,6 @@
                         </form>
                     </div>
                 </div>
-                <script src="~/coach/Coach.js"></script>
             </div>
         </div>
     </div>
@@ -222,6 +221,8 @@
         </div>
     </div>
 
+    <script src="~/coach/Coach.js"></script>
+
     <script>
         document.getElementById("select_determine").addEventListener("click", function () {
             var id = document.getElementById("uid").innerText;
@@ -241,13 +242,13 @@
 
             document.getElementById("checkMsg").innerHTML =
                 `確認送出成長點數嗎？
-                            <hr>
-                            學員姓名：【${name}】
-                            <hr>
-                            學員ID：【${id}】
-                            <hr>
-                            上肢：【${str2}】 || 核心：【${vit2}】 || 下肢：【${agi2}】
-                            <hr>`;
+                                <hr>
+                                學員姓名：【${name}】
+                                <hr>
+                                學員ID：【${id}】
+                                <hr>
+                                上肢：【${str2}】 || 核心：【${vit2}】 || 下肢：【${agi2}】
+                                <hr>`;
         });
 
         document.getElementById("SName").value = "";
