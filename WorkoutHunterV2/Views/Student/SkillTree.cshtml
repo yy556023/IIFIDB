@@ -14,7 +14,7 @@
         <div class="Rank">
             <div id="rankIcon">
                 <div id="rankLV">
-                    <p>Rank @Model.Rank</p>
+                    <img id="RankPicture" alt="lost" class="img-fluid m-2">
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 @if (Model.nowSkill != 0)
                 {
                     <div>
-                    目前技能:<div id="sk_now" style="font-size: 50px;">@Model.Skills.ToList()[Convert.ToInt32(Model.nowSkill - 1)].SkillName</div>
+                        目前技能:<div id="sk_now" style="font-size: 50px;">@Model.Skills.ToList()[Convert.ToInt32(Model.nowSkill - 1)].SkillName</div>
                     </div>
                 }
                 else
@@ -104,6 +104,7 @@
             <div id="up6_7"></div>
         </div>
     </div>
+    <div id="SQLrank" style="display:none">@Model.Rank</div>
     <script src="~/student/skill_tree.js"></script>
     <script>
 
@@ -135,7 +136,7 @@
                 // 5 - 6 - 7
                 // 8
                 if (1 < index && index <= 4) {
-                    
+
                     if (!(document.querySelector(`#sk${index - 1}`).className == "noSkBtn") || tog1) {
                         thisBtn.className = "noSkBtn";
                         thisBtn.disabled = true;
@@ -162,7 +163,7 @@
         }
         // 點擊使用技能鈕
         function nowSkillClick(e) {
-            
+
             let x = e.id;
             var r = /\d{1,2}/g
             data.nowSkill = parseInt(r.exec(x))
@@ -199,6 +200,14 @@
 
             xmlhttp.send(JSON.stringify(data));
         }
+
+        var RankStage = ["S", "A", "B", "C", "D"];
+        var StrRankPicture = "rankIcon_D.png";
+        for (let i = 0; i < RankStage.length; i++) {
+            if (SQLrank.innerText == RankStage[i])
+                StrRankPicture = `rankIcon_${SQLrank.innerText}.png`;
+        }
+        RankPicture.src = `/student/img/${StrRankPicture}`;
     </script>
 </body>
 </html>

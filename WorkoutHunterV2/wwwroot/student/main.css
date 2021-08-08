@@ -1058,9 +1058,9 @@ p {
     height: 16%;
     margin-top: auto;
     margin-left: auto;
-    background-image: url(./img/rankIcon.png);
+   /* background-image: url(./img/rankIcon.png);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100%;*/
     z-index: -1;
 }
 
@@ -1068,8 +1068,8 @@ p {
 #rankLV {
     position: absolute;
     width: 100%;
-    top: 25%;
-    left: 5%;
+    top: 0;
+    left: 30%;
     font-family: 'Press Start 2P';
     font-size: 30px;
     color: aliceblue;
