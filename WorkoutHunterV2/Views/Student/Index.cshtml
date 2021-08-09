@@ -75,8 +75,9 @@
         .rpgFont_style {
             color: white;
             font-style: normal;
-            line-height: 1vh;
-            text-shadow: 0.2em 0.2em 0.2em black
+            font-size: 3vw;
+            line-height: 1;
+            text-shadow: 0.2em 0.2em 0.2em black;
         }
 
         /* pop div seat */
@@ -99,7 +100,7 @@
             background-blend-mode: screen;
             background-repeat: no-repeat;
             background-position: center center;
-            background-attachment: fixed;
+            background-size: cover;
         }
 
         #slot_1, #slot_2, #AdvBtn {
@@ -139,13 +140,15 @@
                 background-position: -350px;
             }
         }
+
         .Back {
             background-image: url(/student/img/GameBack.png);
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            width: 50px;
-            height: 30px;
+            width: 9vw;
+            height: 6vh;
+            margin: 2vw;
         }
     </style>
 </head>
@@ -159,26 +162,26 @@
                         <div class="col-lg-2 col-3 text-center">
                             <img id="RankPicture" alt="lost" class="img-fluid m-2">
                         </div>
-                        <div class="col-lg-6 col-9">
+                        <div class="col-lg-8 col-9">
                             <div class="row m-3">
-                                <div class="col-12 border_style rpgFont_style ">
+                                <div class="col-12 border_style rpgFont_style  px-3 ">
                                     <div>
-                                        <h3>ID:@Model.Uid</h3>
-                                    </div><br>
+                                        <b>   ID:@Model.Uid</b>
+                                    </div>
                                     <div style="display: flex;">
                                         <div class="coin">
                                         </div>
-                                        <h3 style="align-self: center;">@Model.Money</h3>
+                                        <b style="align-self: center;">@Model.Money</b>
                                     </div>
                                 </div>
                                 <div class="col-4 border_style rpgFont_style ">
-                                    <h5 class="MyS">STR:@Model.Strength</h5>
+                                    <b class="MyS">STR:@Model.Strength</b>
                                 </div>
                                 <div class="col-4 border_style rpgFont_style ">
-                                    <h5 class="MyS">VIT:@Model.Vitality</h5>
+                                    <b class="MyS">VIT:@Model.Vitality</b>
                                 </div>
                                 <div class="col-4 border_style rpgFont_style ">
-                                    <h5 class="MyS">AGI:@Model.Agility</h5>
+                                    <b class="MyS">AGI:@Model.Agility</b>
                                 </div>
                             </div>
                         </div>
@@ -368,7 +371,6 @@
             </div>
         </div>
     </div>-->
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
