@@ -40,9 +40,8 @@
 .tablinks:active{
     color: darkgreen;
 }
-#setbtn{
-    height: 0px;
-    padding: 0px;
+#setbtn {
+    background-color: rgba(0, 0, 0, 0.0);
     border: 0px;
     position: relative;
     display: inline-block;
@@ -79,8 +78,7 @@
     box-shadow: 5px 4px 15px 2px #000000;
 }
 #StudentInformation{
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 5%;
     padding-left: 3%;
     padding-right: 3%;
 }
@@ -121,4 +119,14 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+}
+
+.myMargin {
+    margin: 45px 0px 45px 0px !important;
+}
+
+@media(max-width:375px) {
+    .myMargin {
+        margin: 20px 0px 20px 0px !important;
+    }
 }
