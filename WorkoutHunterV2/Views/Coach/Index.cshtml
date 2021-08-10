@@ -13,6 +13,7 @@
     <script src="~/coach/bootstrap.min.js"></script>
     <script src="~/coach/popper.min.js"></script>
     <style type="text/css">
+        
         .bglmg {
             width: 100%;
             height: 100vh;
@@ -56,7 +57,7 @@
                                 @foreach (var item in Model)
                                 {
                                     <li class="student">
-                                        <button class="tablinks" onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
+                                        <button class="tablinks MyLeftStudentHover" onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
                                             @item.Name
                                         </button>
                                     </li>

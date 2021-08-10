@@ -1,5 +1,6 @@
 // 點擊左方學員按鈕，出現學員名稱和照片
 function student_display(evt, studentNumber, studentName) {
+
 	var i, studentContent, studentImg, tablinks;
 	studentContent = document.getElementsByClassName("studentContent"); // 學員姓名div
 	for (i = 0; i < studentContent.length; i++) {
@@ -16,6 +17,7 @@ function student_display(evt, studentNumber, studentName) {
 	document.getElementById("uid").innerText = studentNumber;
 	console.log(studentNumber);
 	evt.currentTarget.className += " active";
+	evt.currentTarget.className += " MySelectBtn";
 
 	document.getElementById("SName").value = studentName;
 	document.getElementById("SID").value = studentNumber;

@@ -111,8 +111,8 @@
         }
 
         .coin {
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             background-image: url(/student/img/Coin2.png);
             -webkit-animation: play 1s steps(7) infinite alternate;
             animation: play 1s steps(7) infinite alternate;
@@ -127,7 +127,7 @@
             }
 
             to {
-                background-position: -350px;
+                background-position: -210px;
             }
         }
 
@@ -137,7 +137,7 @@
             }
 
             to {
-                background-position: -350px;
+                background-position: -210px;
             }
         }
 
@@ -168,7 +168,7 @@
                                     <div>
                                         <b>   ID:@Model.Uid</b>
                                     </div>
-                                    <div style="display: flex;">
+                                    <div style="display: flex;align-items: center;">
                                         <div class="coin">
                                         </div>
                                         <b style="align-self: center;">@Model.Money</b>
@@ -247,7 +247,7 @@
                         </div>
                         <div class="col-md-3 col-12 text-center">
                             <button type="button" onclick="location.href='/Adventure/Index'" class="btn rpgui-button rpgFont_style m-1 Btn" id="AdvBtn">
-                                <h3 class="fw-bolder">Adventure!!</h3>
+                                <b class="fw-bolder">Adventure</b>
                             </button>
                         </div>
                     </div>
