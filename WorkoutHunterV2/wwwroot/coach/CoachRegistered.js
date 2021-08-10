@@ -17,7 +17,7 @@ function student_display(evt, studentNumber, studentName) {
 	}
 	console.log(studentNumber);
   evt.currentTarget.className += " active";
-	evt.currentTarget.className += " MySelectBtn";
+  evt.currentTarget.className += " MySelectBtn";
 
   document.getElementById("SName").value = studentName;
   document.getElementById("SID").value = studentNumber;

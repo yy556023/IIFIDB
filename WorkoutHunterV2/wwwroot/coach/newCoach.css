@@ -131,13 +131,6 @@
     }
 }
 
-.MyLeftStudentHover:hover {
-    color: #01398F;
-    transform: translate(-10px, -10px);
-    transition: transform 0.5s;
-    box-shadow: 5px 5px 10px black;
-}
-
 button {
     font-weight: 800;
 }
@@ -149,4 +142,8 @@ body {
 
 .MySelectBtn {
     background-color: #FFC861;
+    color: #01398F;
+    transform: translate(-10px, -10px);
+    transition: transform 0.5s;
+    box-shadow: 5px 5px 10px black;
 }

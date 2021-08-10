@@ -57,7 +57,7 @@
                                 @foreach (var item in Model)
                                 {
                     <li class="student">
-                        <button class="tablinks MyLeftStudentHover"  onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
+                        <button class="tablinks"  onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
                             @item.Uid <br>
                             @item.Name
                         </button>
@@ -269,7 +269,23 @@
                 教練ID：【${coach}】
                 <hr>`
         });
-
+        var reg = /show/;
+        var IsShow = false;
+        var t = navbarToggleExternalContent.className;
+        document.querySelector(".navbar-toggler").addEventListener("click", function () {
+            if (reg.exec(t) == null) {
+                SName.value = "";
+                SID.value = "";
+                n1.value = "";
+                n2.value = "";
+                n3.value = "";
+                tablinks = document.getElementsByClassName("tablinks"); // 學員按鈕  tablinks=>按鈕的class
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    tablinks[i].className = tablinks[i].className.replace(" MySelectBtn", "");
+                }
+            }
+        })
     </script>
 
 </body>

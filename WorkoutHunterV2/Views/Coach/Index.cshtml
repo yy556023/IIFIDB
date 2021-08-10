@@ -57,7 +57,7 @@
                                 @foreach (var item in Model)
                                 {
                                     <li class="student">
-                                        <button class="tablinks MyLeftStudentHover" onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
+                                        <button class="tablinks" onclick="student_display(event, '@item.Uid', '@item.Name')" id="defaultOpen">
                                             @item.Name
                                         </button>
                                     </li>
