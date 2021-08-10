@@ -52,7 +52,7 @@
                         <div class="t" style="text-align: center">
                             <h5 class="text-white h4" style="margin-bottom: 0px; background: rgb(15, 209, 209); width: 100%">學員</h5>
                             <div id="coachid" style="display:none;">@User.Claims.Single(o => o.Type == "ID")</div>
-                            <ul id="stList" class="students" style="list-style-type: none; padding-left: 0px; margin-bottom: 0px">
+                            <ul id="stList" class="students" style="border: none; list-style-type: none; padding-left: 0px; margin-bottom: 0px">
 
                                 @foreach (var item in Model)
                                 {

@@ -132,9 +132,10 @@
 }
 
 .MyLeftStudentHover:hover {
-    font-weight: bold;
-    text-decoration: underline;
-    font-size: xx-large;
+    color: #01398F;
+    transform: translate(-10px, -10px);
+    transition: transform 0.5s;
+    box-shadow: 5px 5px 10px black;
 }
 
 button {
@@ -143,7 +144,7 @@ button {
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 
 body {
-    font-family: ¡¥cwTeXYen¡¦, sans-serif !important;
+    font-family: 'cwTeXYen', sans-serif !important;
 }
 
 .MySelectBtn {

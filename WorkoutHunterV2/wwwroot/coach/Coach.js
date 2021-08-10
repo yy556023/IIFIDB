@@ -13,6 +13,7 @@ function student_display(evt, studentNumber, studentName) {
 	tablinks = document.getElementsByClassName("tablinks"); // 學員按鈕  tablinks=>按鈕的class
 	for (i = 0; i < tablinks.length; i++) {
 		tablinks[i].className = tablinks[i].className.replace(" active", "");
+		tablinks[i].className = tablinks[i].className.replace(" MySelectBtn", "");
 	}
 	document.getElementById("uid").innerText = studentNumber;
 	console.log(studentNumber);

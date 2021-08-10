@@ -52,7 +52,7 @@
                         <div class="t" style="text-align: center">
                             <h5 class="text-white h4" style="margin-bottom: 0px; background: rgb(15, 209, 209); width: 100%">學員</h5>
                             <div id="uid" style="display:none;"></div>
-                            <ul id="stList" class="students" style="list-style-type: none; padding-left: 0px; margin-bottom: 0px">
+                            <ul id="stList" class="students" style=" border: none; list-style-type: none; padding-left: 0px; margin-bottom: 0px">
 
                                 @foreach (var item in Model)
                                 {
@@ -286,7 +286,23 @@
                     return console.error(err.toString());
                 });
         });
-        
+        var reg = /show/;
+        var IsShow = false;
+        var t = navbarToggleExternalContent.className;
+        document.querySelector(".navbar-toggler").addEventListener("click", function () {
+            if (reg.exec(t) == null) {
+                SName.value = "";
+                SID.value = "";
+                n1.value = "";
+                n2.value = "";
+                n3.value = "";
+                tablinks = document.getElementsByClassName("tablinks"); // 學員按鈕  tablinks=>按鈕的class
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    tablinks[i].className = tablinks[i].className.replace(" MySelectBtn", "");
+                }
+            }
+        })
     </script>
 </body>
 </html>
