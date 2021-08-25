@@ -247,7 +247,7 @@ namespace WorkoutHunterV2.Controllers
             _cache.Set($"{CacheStr}{i}", myCache, TimeSpan.FromMinutes(5));
 
 
-            var client = new SendGridClient("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");
+            var client = new SendGridClient("SENDGRID_KEY");
             var from = new EmailAddress("yy556023@gmail.com");
             var subject = "會員註冊認證信";
             var to = new EmailAddress("ub1213go@gmail.com");
