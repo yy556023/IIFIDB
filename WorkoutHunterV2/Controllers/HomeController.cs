@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WorkoutHunterV2.Models;
@@ -88,7 +91,7 @@ namespace WorkoutHunterV2.Controllers
                     {
                         return Redirect(ReturnUrl);// 導到原始要求網址
                     }
-                    else if(data.Role == "C")
+                    else if (data.Role == "C")
                     {
                         return RedirectToAction("Index", "Coach");// 到登入後的第一頁，自行決定
                     }
@@ -125,12 +128,12 @@ namespace WorkoutHunterV2.Controllers
                 TempData["errorMsg"] = "密碼不一致";
                 return View();
             }
-            if(role == null)
+            if (role == null)
             {
                 TempData["errorMsg"] = "請選擇註冊的角色";
                 return View();
             }
-            if(Name == null)
+            if (Name == null)
             {
                 TempData["errorMsg"] = "姓名不能為空";
                 return View();
@@ -194,7 +197,7 @@ namespace WorkoutHunterV2.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(string Email)
+        public async Task<IActionResult> ForgotPassword(string Email)
         {
             MyCache myCache;
             // 確認帳號存在
@@ -236,14 +239,29 @@ namespace WorkoutHunterV2.Controllers
 
             emailworker.content = $"<h1>會員註冊認證信</h1><br><h3>親愛的{Email}會員您好:</h3><br>" +
                 $"<div style='font-size:16px;color:black'>為了驗證您的身分，請盡速點擊下列網址，並修改密碼<br></div>  " +
-                $"<a href='https://localhost:44370/home/CheckEmail?Key=" + str + "'>https://localhost:44370/home/CheckEmail?Key=" + str + "</a><br><br>" +
+                $"<a href='https://workouthunter.azurewebsites.net/home/CheckEmail?Key=" + str + "'>https://workouthunter.azurewebsites.net/home/CheckEmail?Key=" + str + "</a><br><br>" +
                 "<div>在此感謝您的配合！</div>";
 
             myCache.U = emailworker.UID;
             myCache.K = emailworker.Key;
             _cache.Set($"{CacheStr}{i}", myCache, TimeSpan.FromMinutes(5));
-                
-            emailworker.MailSend();
+
+
+            var client = new SendGridClient("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");
+            var from = new EmailAddress("yy556023@gmail.com");
+            var subject = "會員註冊認證信";
+            var to = new EmailAddress("ub1213go@gmail.com");
+            var plainTextContent = "會員註冊認證信";
+            var htmlContent = $"<h1>會員註冊認證信</h1><br><h3>親愛的 {Email} 會員您好:</h3><br>" +
+                $"<div style='font-size:16px;color:black'>為了驗證您的身分，請盡速點擊下列網址，並修改密碼<br></div>  " +
+                $"<a href='https://workouthunter.azurewebsites.net/home/CheckEmail?Key=" + str + "'>https://workouthunter.azurewebsites.net/home/CheckEmail?Key=" + str + "</a><br><br>" +
+                "<div>在此感謝您的配合！</div>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
+
+
+
+            //emailworker.MailSend();
             return Content("認證信已寄出");
         }
         public IActionResult CheckEmail(string Key)
@@ -274,15 +292,15 @@ namespace WorkoutHunterV2.Controllers
             }
             string CacheStr = "UserLoginInfo";
             int i = 1;
-            while(_cache.TryGetValue($"{CacheStr}{i}", out cache))
+            while (_cache.TryGetValue($"{CacheStr}{i}", out cache))
             {
-                if(Convert.ToBase64String(cache.K) == UserPasswordEdit.Key)
+                if (Convert.ToBase64String(cache.K) == UserPasswordEdit.Key)
                 {
                     Verifier V = new Verifier();
                     UserPasswordEdit.UID = cache.U;
                     var query = (from o in _context.UserInfos
-                                where o.Uid == UserPasswordEdit.UID
-                                select o).FirstOrDefault();
+                                 where o.Uid == UserPasswordEdit.UID
+                                 select o).FirstOrDefault();
                     byte[] salt = V.createSalt();
                     string password = V.createHash(UserPasswordEdit.Password, salt);
 

@@ -268,24 +268,40 @@
         var FormPut = document.getElementById("InPut");
 
         FormPut.addEventListener("submit", function () {
-            alert("學員成長點數已送出");
 
-            var str = document.getElementById("str").value;
-            var vit = document.getElementById("vit").value;
-            var agi = document.getElementById("agi").value;
-            var uid = document.getElementById("uidpost").value;
+            var p1 = Promise.resolve();
 
-            connection
-                .invoke("SendMessage", uid, str, vit, agi)
-                .then(function () {
-                    document.getElementById("n1").value = "";
-                    document.getElementById("n2").value = "";
-                    document.getElementById("n3").value = "";
-                })
-                .catch(function (err) {
-                    return console.error(err.toString());
-                });
+            p1.then(
+                () => {
+
+                    var str = document.getElementById("str").value;
+                    var vit = document.getElementById("vit").value;
+                    var agi = document.getElementById("agi").value;
+                    var uid = document.getElementById("uidpost").value;
+
+                    connection
+                        .invoke("SendMessage", uid, str, vit, agi)
+                        .then(function () {
+                            document.getElementById("n1").value = "";
+                            document.getElementById("n2").value = "";
+                            document.getElementById("n3").value = "";
+                        })
+                        .catch(function (err) {
+                            return console.error(err.toString());
+                        });
+
+                }
+            ).then(
+                () => {
+                    alert("學員成長點數已送出");
+                }
+            );   
         });
+
+
+
+
+
         var reg = /show/;
         var IsShow = false;
         var t = navbarToggleExternalContent.className;
